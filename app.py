@@ -7,6 +7,12 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql:///reftool"
 db = SQLAlchemy(app)
 
+@app.route("/")
+def index():
+    result = db.session.execute("SELECT * FROM Books")
+    references = result.fetchall()
+    return render_template("index.html", references=references)
+
 @app.route("/new")
 def new():
     return render_template("new.html")
