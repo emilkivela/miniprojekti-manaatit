@@ -1,0 +1,27 @@
+from flask import Flask
+from flask import redirect, render_template, request
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql import text
+from db_connection import db
+
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+#    result = db.session.execute(text("SELECT * FROM books"))
+#    references = result.fetchall()
+    return render_template("index.html")  #add references=references when db working
+
+#@app.route("/new")
+#def new():
+#    return render_template("new.html")
+
+# @app.route("/create", methods=["POST"])
+# def create():
+#     title = request.form["title"]
+#     author = request.form["author"]
+#     year = request.form["year"]
+#     sql = "INSERT INTO Books (title, author, year) VALUES (:title, :author, :year)"
+#     db.session.execute(text(sql), {"title": title, "author": author, "year": year})
+#     db.session.commit()
+#     return redirect("/")
