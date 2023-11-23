@@ -18,10 +18,11 @@ def index():
 
 # @app.route("/create", methods=["POST"])
 # def create():
+#     key = request.form["key"]
 #     title = request.form["title"]
 #     author = request.form["author"]
 #     year = request.form["year"]
-#     sql = "INSERT INTO Books (title, author, year) VALUES (:title, :author, :year)"
-#     db.session.execute(text(sql), {"title": title, "author": author, "year": year})
+#     sql = "INSERT INTO Books (refkey, title, author, year) VALUES (:key, :title, :author, :year)"
+#     db.session.execute(text(sql), {"key": key, "title": title, "author": author, "year": year})
 #     db.session.commit()
 #     return redirect("/")
