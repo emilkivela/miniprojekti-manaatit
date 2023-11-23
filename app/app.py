@@ -3,7 +3,7 @@ from os import getenv
 from flask import Flask
 from flask import redirect, render_template, request
 
-from app.db_connection import db
+#from app.db_connection import db
 
 app = Flask(__name__)
 
