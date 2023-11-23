@@ -1,7 +1,8 @@
 from flask import Flask
+from os import getenv
+from flask import Flask
 from flask import redirect, render_template, request
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.sql import text
+
 from db_connection import db
 
 app = Flask(__name__)
