@@ -5,13 +5,9 @@ from flask import redirect, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import text
 
-#from app.db_connection import db
-
 app = Flask(__name__)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql:///reftool"
-db = SQLAlchemy(app)
-
+from app.db_connection import db
 @app.route("/")
 def index():
     result = db.session.execute(text("SELECT * FROM books"))
