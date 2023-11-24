@@ -1,6 +1,5 @@
 from app import app
 from flask_sqlalchemy import SQLAlchemy
-from os import getenv
 import os
 
 conn_str = os.environ['AZURE_POSTGRESQL_CONNECTIONSTRING']
