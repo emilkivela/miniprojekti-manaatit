@@ -3,5 +3,5 @@ CREATE TABLE books (
     refkey TEXT,
     title TEXT,
     author TEXT,
-    pubYear INTEGER
+    year INTEGER
 );
