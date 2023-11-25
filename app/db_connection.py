@@ -1,6 +1,7 @@
 from app.app import app
 from flask_sqlalchemy import SQLAlchemy
 import os
+from flask_migrate import Migrate
 
 conn_str = os.environ['AZURE_POSTGRESQL_CONNECTIONSTRING']
 print(conn_str[:10])
@@ -14,3 +15,12 @@ DATABASE_URI = 'postgresql+psycopg2://{dbuser}:{dbpass}@{dbhost}/{dbname}'.forma
 )
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URI
 db = SQLAlchemy(app)
+
+migrate = Migrate(app, db)
+
+class Books(db.Model):
+    __tablename__= "books"
+    refkey = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=True)
+    author = db.Column(db.String(200), nullable=True)
+    pubyear = db.Column(db.Integer, nullable=True)
