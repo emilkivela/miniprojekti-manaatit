@@ -20,7 +20,8 @@ migrate = Migrate(app, db)
 
 class Books(db.Model):
     __tablename__= "books"
-    refkey = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    refkey = db.Column(db.String(200), nullable=True)
     title = db.Column(db.String(200), nullable=True)
     author = db.Column(db.String(200), nullable=True)
     pubyear = db.Column(db.Integer, nullable=True)
