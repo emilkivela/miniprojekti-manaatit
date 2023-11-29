@@ -2,6 +2,9 @@ from app.app import app
 from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_migrate import Migrate
+from dotenv import load_dotenv
+
+load_dotenv()   # take environment variables from .env
 
 conn_str = os.environ['AZURE_POSTGRESQL_CONNECTIONSTRING']
 print(conn_str[:10])
