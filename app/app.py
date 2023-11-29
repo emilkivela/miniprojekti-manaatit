@@ -29,6 +29,13 @@ def create():
     title = request.form["title"]
     author = request.form["author"]
     year = request.form["year"]
+    
+    if not key or not title or not author or not year:
+        return render_template("new.html", error="All fields must be filled")
+        
+    if not year.isdigit():
+        return render_template("new.html", error="Year must be a number")
+    
     sql = "INSERT INTO books (refkey, title, author, pubYear) VALUES (:key, :title, :author, :year)"
     db.session.execute(text(sql), {"key": key, "title": title, "author": author, "year": year})
     db.session.commit()
