@@ -10,16 +10,14 @@
    - ``` käyttäjätähän ``` on käyttäjänimesi PostGreSQL:ssä omalla koneellasi
    - ``` salasanatähän ``` on kyseisen käyttäjän salasana
    - (Jos et ole vielä asettanut PostGreSQL:ssä salasanaa, niin sen voi tehdä SQL-komennolla ``` ALTER USER käyttäjätähän WITH PASSWORD 'salasanatähän'; ```)
-5. Luo tietokantataulut ajamalla app-hakemistossa komennot ``` flask db init && flask db migrate -m "initial migration" && flask db upgrade ```
-6. Käynnistä sovellus ajamalla komento ``` flask -A app/app run ``` juurihakemistossa
+5. Käynnistä sovellus ajamalla komento ``` flask -A app/app run ``` juurihakemistossa
 
 ## Sovelluksen käynnistäminen Azuressa
-- Käytä Azure App Servicesiä, joka sisältää PostqreSQL-tietokannan
-- Siirry Deployment Centeriin, lisää Git repositorio ja tallenna
-- Suorita Sync
-- Siirry Azuressa: Configuration -> General settings ja lisää Startup Command ``` gunicorn --bind=0.0.0.0 --timeout 600 startup:app ```
-- Käynnistä palvelin
-- Siirry SSH-konsoliin ja luo tietokantataulut komennoilla ``` flask db init && flask db migrate -m "initial migration" && flask db upgrade ```
+1. Käytä Azure App Servicesiä, joka sisältää PostqreSQL-tietokannan
+2. Siirry Deployment Centeriin, lisää Git repositorio ja tallenna
+3. Suorita Sync
+4. Siirry Azuressa: Configuration -> General settings ja lisää Startup Command ``` gunicorn --bind=0.0.0.0 --timeout 600 startup:app ```
+5. Käynnistä palvelin
 
 ## Testit
 - Suorita testit virtuaaliympäristössä ajamalla komento ``` pytest ``` juurihakemistossa
