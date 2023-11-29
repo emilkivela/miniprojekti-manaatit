@@ -2,6 +2,7 @@ alembic==1.12.1
 astroid==3.0.1
 blinker==1.7.0
 click==8.1.7
+coverage==7.3.2
 dill==0.3.7
 Flask==3.0.0
 Flask-Alembic==2.0.1
