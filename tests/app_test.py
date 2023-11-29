@@ -28,4 +28,4 @@ def test_index_fetches_refs_from_database(client):
         db.session.execute(text(sql), {"key": "MIKA", "title": "Sivullinen", "author": "Camus", "year": 1942})
         db.session.commit()
     response = client.get("/")
-    assert b"Sivullinen" and b"Camus" and b"1942" in response.data
+    assert b"Sivullinen" in response.data and b"Camus" in response.data and b"1942" in response.data

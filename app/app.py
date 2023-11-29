@@ -1,7 +1,7 @@
 from flask import Flask
 from os import getenv
 from flask import Flask
-from flask import redirect, render_template, request
+from flask import redirect, render_template, request, send_file
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import text
 
@@ -17,6 +17,11 @@ def index():
 @app.route("/new")
 def new():
     return render_template("new.html")
+
+@app.route("/download")
+def download():
+    path = 'esimerkki.txt'
+    return send_file(path, as_attachment=True)
 
 @app.route("/create", methods=["POST"])
 def create():
