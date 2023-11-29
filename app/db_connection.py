@@ -36,3 +36,14 @@ class Books(db.Model):
     title = db.Column(db.String(200), nullable=True)
     author = db.Column(db.String(200), nullable=True)
     pubyear = db.Column(db.Integer, nullable=True)
+
+class Articles(db.Model):
+    __tablename__= "articles"
+    id = db.Column(db.Integer, primary_key=True)
+    refkey = db.Column(db.String(200), nullable=True)
+    title = db.Column(db.String(200), nullable=True)
+    author = db.Column(db.String(200), nullable=True)
+    journal = db.Column(db.String(200), nullable=True)
+    pubyear = db.Column(db.Integer, nullable=True)
+    volume = db.Column(db.String(200), nullable=True)
+    pages = db.Column(db.String(200), nullable=True)
