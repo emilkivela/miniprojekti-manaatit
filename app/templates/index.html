@@ -12,6 +12,7 @@
         <form action="/new">
             <input type="submit" value="Create a new reference">
         </form>
+        <a href="{{url_for('download')}}"> Download file</a>
         <h3>Book-references</h3>
         {% for book in books %}
         <br>
@@ -33,7 +34,7 @@
             Journal: {{ article[4] }}<br>
             Year: {{ article[5] }}<br>
             Volume: {{ article[6] }}<br>
-            Pages: {{ article[6] }}
+            Pages: {{ article[7] }}
         </p>
         {% endfor %}
     </body>

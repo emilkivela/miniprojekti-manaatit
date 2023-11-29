@@ -1,7 +1,7 @@
 from flask import Flask
 from os import getenv
 from flask import Flask
-from flask import redirect, render_template, request
+from flask import redirect, render_template, request, send_file
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import text
 
@@ -20,12 +20,24 @@ def index():
 def new():
     return render_template("new.html")
 
+@app.route("/download")
+def download():
+    path = 'esimerkki.txt'
+    return send_file(path, as_attachment=True)
+
 @app.route("/create_book", methods=["POST"])
 def create_book():
     key = request.form["key"]
     title = request.form["title"]
     author = request.form["author"]
     year = request.form["year"]
+    
+    if not key or not title or not author or not year:
+        return render_template("new.html", error="All fields must be filled")
+        
+    if not year.isdigit():
+        return render_template("new.html", error="Year must be a number")
+    
     sql = "INSERT INTO books (refkey, title, author, pubYear) VALUES (:key, :title, :author, :year)"
     db.session.execute(text(sql), {"key": key, "title": title, "author": author, "year": year})
     db.session.commit()

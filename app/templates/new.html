@@ -84,7 +84,13 @@
                 </p>
             </form>
         </div>
-        <a href="/">Back to homepage</a>
+
+        {% if error %}
+            <p> {{ error }}</p>
+        {% endif %}
+
+        <br>
+        <a href="/">Return to main page</a>
 <body>
 <html>
 
