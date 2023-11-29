@@ -7,7 +7,6 @@ from dotenv import load_dotenv
 load_dotenv()   # take environment variables from .env
 
 conn_str = os.environ['AZURE_POSTGRESQL_CONNECTIONSTRING']
-print(conn_str[:10])
 conn_str_params = {pair.split('=')[0]: pair.split('=')[1] for pair in conn_str.split(' ')}
 
 DATABASE_URI = 'postgresql+psycopg2://{dbuser}:{dbpass}@{dbhost}/{dbname}'.format(
@@ -18,8 +17,6 @@ DATABASE_URI = 'postgresql+psycopg2://{dbuser}:{dbpass}@{dbhost}/{dbname}'.forma
 )
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URI
 db = SQLAlchemy(app)
-
-migrate = Migrate(app, db)
 
 class Books(db.Model):
     __tablename__= "books"
@@ -39,3 +36,6 @@ class Articles(db.Model):
     pubyear = db.Column(db.Integer, nullable=True)
     volume = db.Column(db.String(200), nullable=True)
     pages = db.Column(db.String(200), nullable=True)
+
+with app.app_context():
+    db.create_all()
