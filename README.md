@@ -1,5 +1,6 @@
 ## Manaattien LaTeX-viitetyökalu
 ![GHA workflow badge](https://github.com/emilkivela/miniprojekti-manaatit/workflows/CI/badge.svg)
+[![codecov](https://codecov.io/gh/emilkivela/miniprojekti-manaatit/graph/badge.svg)](https://codecov.io/gh/emilkivela/miniprojekti-manaatit)
 - [Backlog](https://helsinkifi-my.sharepoint.com/:x:/g/personal/jannekoi_ad_helsinki_fi/EYn4NiHQI7NOrNhXnwcYWz4BjzSH1-En9Xs1Cre1dXYCrw?e=KMDOtW)
 
 ## Sovelluksen käynnistäminen paikallisesti
