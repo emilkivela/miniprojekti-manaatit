@@ -22,7 +22,7 @@ Add Book With Key Missing
     Set Author  Ewdkos Kdiffs
     Set Year  1876
     Submit Info
-    Page Should Contain  Create reference
+    Wait Until Page Contains  Create reference
     Page Should Contain  All fields must be filled
 
 Add Book With Title Missing
@@ -30,7 +30,7 @@ Add Book With Title Missing
     Set Author  Ewdkos Kdiffs
     Set Year  1876
     Submit Info
-    Page Should Contain  Create reference
+    Wait Until Page Contains  Create reference
     Page Should Contain  All fields must be filled
 
 Add Book With Author Missing
@@ -38,7 +38,7 @@ Add Book With Author Missing
     Set Title  Jdsfh Yeshd
     Set Year  1876
     Submit Info
-    Page Should Contain  Create reference
+    Wait Until Page Contains  Create reference
     Page Should Contain  All fields must be filled
 
 Add Book With Year Missing
@@ -46,7 +46,7 @@ Add Book With Year Missing
     Set Title  Jdsfh Yeshd
     Set Author  Ewdkos Kdiffs
     Submit Info
-    Page Should Contain  Create reference
+    Wait Until Page Contains  Create reference
     Page Should Contain  All fields must be filled
 
 Add Book With Non-Numeric Year
@@ -55,7 +55,7 @@ Add Book With Non-Numeric Year
     Set Author  Ewdkos Kdiffs
     Set Year  18r6
     Submit Info
-    Page Should Contain  Create reference
+    Wait Until Page Contains  Create reference
     Page Should Contain  Year must be a number
 
 *** Keywords ***

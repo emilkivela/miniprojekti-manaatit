@@ -9,4 +9,4 @@ Download File
     Go To Home Page
     Index Page Should Be Open
     Click Link  Download file
-    File Should Exist    ${DOWNLOAD_DIR}/references.bib
+    Wait Until Created    ${DOWNLOAD_DIR}/references.bib
