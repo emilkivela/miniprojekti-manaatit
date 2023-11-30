@@ -3,7 +3,8 @@ Library  SeleniumLibrary
 
 *** Variables ***
 ${SERVER}  localhost:5000
-${DELAY}  0.2 seconds
+${DELAY}  0 seconds
+${INDEX_URL}  http://${SERVER}/
 ${ADDING_URL}  http://${SERVER}/new
 
 *** Keywords ***
@@ -20,6 +21,13 @@ Go To Ref Adding Page
 Book Adding Page Should Be Open
     Location Should Be  ${ADDING_URL}
     Page Should Contain  Create reference
+    Radio Button Should Be Set To  reftype  showbook
+
+Article Adding Page Should Be Open
+    Location Should Be  ${ADDING_URL}
+    Page Should Contain  Create reference
+    Radio Button Should Be Set To  reftype  showarticle
 
 Index Page Should Be Open
+    Wait Until Location Is  ${INDEX_URL}
     Title Should Be  Main page
