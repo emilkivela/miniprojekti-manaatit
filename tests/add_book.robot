@@ -17,6 +17,47 @@ Add Book With Valid Info
     Page Should Contain  Ewdkos Kdiffs
     Page Should Contain  1876
 
+Add Book With Key Missing
+    Set Title  Jdsfh Yeshd
+    Set Author  Ewdkos Kdiffs
+    Set Year  1876
+    Submit Info
+    Page Should Contain  Create reference
+    Page Should Contain  All fields must be filled
+
+Add Book With Title Missing
+    Set Key  SFGH
+    Set Author  Ewdkos Kdiffs
+    Set Year  1876
+    Submit Info
+    Page Should Contain  Create reference
+    Page Should Contain  All fields must be filled
+
+Add Book With Author Missing
+    Set Key  SFGH
+    Set Title  Jdsfh Yeshd
+    Set Year  1876
+    Submit Info
+    Page Should Contain  Create reference
+    Page Should Contain  All fields must be filled
+
+Add Book With Year Missing
+    Set Key  SFGH
+    Set Title  Jdsfh Yeshd
+    Set Author  Ewdkos Kdiffs
+    Submit Info
+    Page Should Contain  Create reference
+    Page Should Contain  All fields must be filled
+
+Add Book With Non-Numeric Year
+    Set Key  SFGH
+    Set Title  Jdsfh Yeshd
+    Set Author  Ewdkos Kdiffs
+    Set Year  18r6
+    Submit Info
+    Page Should Contain  Create reference
+    Page Should Contain  Year must be a number
+
 *** Keywords ***
 Submit Info
     Click Button  Create reference
