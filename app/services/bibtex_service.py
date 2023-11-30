@@ -52,9 +52,9 @@ class BibtexService:
             for field in ref:
                 field = str(field)
                 edited_field = field.replace('"', '\\"') \
-                                .replace('$', '\$') \
-                                .replace('{', '\{') \
-                                .replace('}', '\}')
+                                .replace('$', '\\$') \
+                                .replace('{', '\\{') \
+                                .replace('}', '\\}')
                 new_ref.append(edited_field)
             result.append(new_ref)
 
