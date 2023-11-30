@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import redirect, render_template, request, send_file
 from sqlalchemy.sql import text
+from app.services.bibtex_service import BibtexService
 
 app = Flask(__name__)
 
@@ -19,7 +20,15 @@ def new():
 
 @app.route("/download")
 def download():
-    path = 'esimerkki.txt'
+    result = db.session.execute(text("SELECT * FROM books"))
+    books = result.fetchall()
+    result = db.session.execute(text("SELECT * FROM articles"))
+    articles = result.fetchall()
+
+    path = 'references.bib'
+    bibtex_service = BibtexService(path, books, articles)
+    bibtex_service.create_bibtex_file()
+
     return send_file(path, as_attachment=True)
 
 @app.route("/create_book", methods=["POST"])
