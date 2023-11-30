@@ -5,13 +5,13 @@ class BibtexService:
         self._filename = filename
         self._books = self._escape_special_chars(books)
         self._articles = self._escape_special_chars(articles)
-    
+
     def create_bibtex_file(self):
         bibtex_str = self._generate_bibtex_str()
 
         with open("app/" + self._filename, "w", encoding="utf-8") as file:
             file.write(bibtex_str)
-    
+
     def _generate_bibtex_str(self):
         bibtex_str = ""
 
@@ -32,7 +32,7 @@ class BibtexService:
             f"}}\n\n"
             f''
         )
-    
+
     def _stringity_article(self, article):
         return (
             f"@article{{{article[1]},\n"
@@ -44,10 +44,10 @@ class BibtexService:
             f"  pages = \"{article[7]}\"\n"
             f"}}\n\n"
         )
-    
-    def _escape_special_chars(self, list):
+
+    def _escape_special_chars(self, ref_list):
         result = []
-        for ref in list:
+        for ref in ref_list:
             new_ref = []
             for field in ref:
                 field = str(field)
@@ -57,5 +57,5 @@ class BibtexService:
                                 .replace('}', '\}')
                 new_ref.append(edited_field)
             result.append(new_ref)
-        
+
         return result
