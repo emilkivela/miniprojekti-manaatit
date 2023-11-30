@@ -49,6 +49,16 @@ def create_article():
     year = request.form["year"]
     volume = request.form["volume"]
     pages = request.form["pages"]
+
+    if not key or not title or not author or not journal:
+        return render_template("new.html", error="All fields must be filled")
+
+    if not year or not volume or not pages:
+        return render_template("new.html", error="All fields must be filled")
+
+    if not year.isdigit():
+        return render_template("new.html", error="Year must be a number")
+
     sql = "INSERT INTO articles (refkey, title, author, journal, pubyear, volume, pages) "\
           "VALUES (:key, :title, :author, :journal, :year, :volume, :pages)"
     db.session.execute(text(sql), {"key": key, "title": title, "author": author, "journal": journal,
