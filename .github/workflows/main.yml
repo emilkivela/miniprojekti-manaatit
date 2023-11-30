@@ -40,7 +40,9 @@ jobs:
       run: pylint app
     - name: Pylint tests
       run: pylint tests
+    - name: Coverage test
+      run: coverage run --branch -m pytest
     - name: Coverage report
-      run: poetry run coverage xml
+      run: coverage xml
     - name: Coverage report to Codecov
       run: bash <(curl -s https://codecov.io/bash)
