@@ -62,3 +62,39 @@ def test_create_book_ref_with_non_integer_year(client):
         "year": "jotain"
     })
     assert b'Year must be a number' in response.get_data(as_text=True).encode('utf-8')
+
+def test_create_article_ref_with_empty_fields(client):
+    with app.app_context():
+        db.session.execute(text("TRUNCATE TABLE articles"))
+        db.session.commit()
+
+    response = client.post("/create_article", data={
+        "key": "",
+        "title": "",
+        "author": "",
+        "journal": "",
+        "year": "",
+        "volume": "",
+        "pages": ""
+    })
+
+    print(f"Response Status Code: {response.status_code}")
+    print(f"Response Data: {response.get_data(as_text=True)}")
+
+    assert b'All fields must be filled' in response.get_data(as_text=True).encode('utf-8')
+
+def test_create_article_ref_with_non_integer_year(client):
+    with app.app_context():
+        db.session.execute(text("TRUNCATE TABLE articles"))
+        db.session.commit()
+
+    response = client.post("/create_article", data={
+        "key": "jotain",
+        "title": "jotain",
+        "author": "jotain",
+        "journal": "jotain",
+        "year": "jotain",
+        "volume": "jotain",
+        "pages": "jotain"
+    })
+    assert b'Year must be a number' in response.get_data(as_text=True).encode('utf-8')
