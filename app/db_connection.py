@@ -1,20 +1,18 @@
-from app.app import app
-from flask_sqlalchemy import SQLAlchemy
 import os
-from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
+from app.app import app
 
 load_dotenv()   # take environment variables from .env
 
 conn_str = os.environ['AZURE_POSTGRESQL_CONNECTIONSTRING']
 conn_str_params = {pair.split('=')[0]: pair.split('=')[1] for pair in conn_str.split(' ')}
 
-DATABASE_URI = 'postgresql+psycopg2://{dbuser}:{dbpass}@{dbhost}/{dbname}'.format(
-    dbuser=conn_str_params['user'],
-    dbpass=conn_str_params['password'],
-    dbhost=conn_str_params['host'],
-    dbname=conn_str_params['dbname']
-)
+dbuser = conn_str_params['user']
+dbpass = conn_str_params['password']
+dbhost = conn_str_params['host']
+dbname = conn_str_params['dbname']
+DATABASE_URI = f"postgresql+psycopg2://{dbuser}:{dbpass}@{dbhost}/{dbname}"
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URI
 db = SQLAlchemy(app)
 

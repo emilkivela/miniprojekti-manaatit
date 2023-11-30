@@ -1,16 +1,16 @@
+from sqlalchemy.sql import text
 from app.app import app
 from app.app import db
-from sqlalchemy.sql import text
 
 def test_opening_ref_creation_page(client):
     response = client.get("/new")
     assert b"Author" in response.data
 
-def test_created_ref_is_in_database(client):
+def test_created_book_ref_is_in_database(client):
     with app.app_context():
         db.session.execute(text("TRUNCATE TABLE books"))
         db.session.commit()
-        response = client.post("/create", data={
+        client.post("/create_book", data={
             "key": "MIKA",
             "title": "Jotain",
             "author": "Joku",
@@ -24,8 +24,10 @@ def test_index_fetches_refs_from_database(client):
     with app.app_context():
         db.session.execute(text("TRUNCATE TABLE books"))
         db.session.commit()
-        sql = "INSERT INTO books (refkey, title, author, pubYear) VALUES (:key, :title, :author, :year)"
-        db.session.execute(text(sql), {"key": "MIKA", "title": "Sivullinen", "author": "Camus", "year": 1942})
+        sql = "INSERT INTO books (refkey, title, author, pubYear) "\
+              "VALUES (:key, :title, :author, :year)"
+        db.session.execute(text(sql), {"key": "MIKA", "title": "Sivullinen",
+                                       "author": "Camus", "year": 1942})
         db.session.commit()
     response = client.get("/")
     assert b"Sivullinen" in response.data and b"Camus" in response.data and b"1942" in response.data
