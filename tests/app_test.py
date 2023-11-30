@@ -63,19 +63,57 @@ def test_create_book_ref_with_non_integer_year(client):
     })
     assert b'Year must be a number' in response.get_data(as_text=True).encode('utf-8')
 
-def test_create_article_ref_with_empty_fields(client):
+def test_created_article_ref_is_in_database(client):
+    with app.app_context():
+        db.session.execute(text("TRUNCATE TABLE articles"))
+        db.session.commit()
+        client.post("/create_article", data={
+            "key": "MIKA",
+            "title": "Jotain",
+            "author": "Joku",
+            "journal": "Lehti",
+            "year": "2002",
+            "volume": "17",
+            "pages": "56-7"
+        })
+        result = db.session.execute(text("SELECT * FROM articles"))
+    ref = result.fetchone()
+    assert ref[1] == "MIKA" and ref[2] == "Jotain" and ref[3] == "Joku" and ref[4] == "Lehti" and\
+           ref[5] == 2002 and ref[6] == "17" and ref[7] == "56-7"
+
+def test_create_article_ref_with_empty_author_field(client):
     with app.app_context():
         db.session.execute(text("TRUNCATE TABLE articles"))
         db.session.commit()
 
     response = client.post("/create_article", data={
-        "key": "",
-        "title": "",
+        "key": "YVJH",
+        "title": "Rfidso",
         "author": "",
-        "journal": "",
-        "year": "",
+        "journal": "Ewiodfi",
+        "year": "1924",
+        "volume": "16",
+        "pages": "3-4"
+    })
+
+    print(f"Response Status Code: {response.status_code}")
+    print(f"Response Data: {response.get_data(as_text=True)}")
+
+    assert b'All fields must be filled' in response.get_data(as_text=True).encode('utf-8')
+
+def test_create_article_ref_with_empty_volume_field(client):
+    with app.app_context():
+        db.session.execute(text("TRUNCATE TABLE articles"))
+        db.session.commit()
+
+    response = client.post("/create_article", data={
+        "key": "YVJH",
+        "title": "Rfidso",
+        "author": "Oweuf Wdsff",
+        "journal": "Ewiodfi",
+        "year": "1924",
         "volume": "",
-        "pages": ""
+        "pages": "3-4"
     })
 
     print(f"Response Status Code: {response.status_code}")
