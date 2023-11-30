@@ -4,9 +4,9 @@
 flask -A app/app run &> /dev/null &
 
 # odetetaan, että palvelin on valmiina ottamaan vastaan pyyntöjä
-while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:5000/ping)" != "404" ]];
-  do sleep 1;
-done
+#while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:5000/ping)" != "404" ]];
+#  do sleep 1;
+#done
 
 # suoritetaan testit
 #robot tests
