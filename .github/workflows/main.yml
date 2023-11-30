@@ -36,3 +36,7 @@ jobs:
       env:
         DATABASE_URL: postgresql://postgres:postgres@localhost/postgres
         AZURE_POSTGRESQL_CONNECTIONSTRING: 'host=localhost:5432 dbname=testdb user=testuser password=testpassword'
+    - name: Pylint app
+      run: pylint app
+    - name: Pylint tests
+      run: pylint tests
