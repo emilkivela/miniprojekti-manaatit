@@ -16,7 +16,7 @@ class BibtexService:
             bibtex_str += self._stringity_article(article)
 
         return bibtex_str
-    
+
     def _init_refs(self):
         self._books = self._escape_special_chars(self._books)
         self._articles = self._escape_special_chars(self._articles)
