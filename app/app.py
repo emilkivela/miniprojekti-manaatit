@@ -2,6 +2,7 @@ from flask import Flask
 from flask import redirect, render_template, request, send_file
 from sqlalchemy.sql import text
 from app.services.bibtex_service import BibtexService
+from io import BytesIO
 
 app = Flask(__name__)
 
@@ -25,11 +26,14 @@ def download():
     result = db.session.execute(text("SELECT * FROM articles"))
     articles = result.fetchall()
 
-    path = 'references.bib'
-    bibtex_service = BibtexService(path, books, articles)
-    bibtex_service.create_bibtex_file()
+    bibtex_service = BibtexService(books, articles)
+    bibtex_str = bibtex_service.generate_bibtex_str()
 
-    return send_file(path, as_attachment=True)
+    return send_file(BytesIO(bytes(bibtex_str, "utf-8")), 
+                     as_attachment=True, 
+                     download_name="references.bib",
+                     mimetype="application/x-bibtex"
+                     )
 
 @app.route("/create_book", methods=["POST"])
 def create_book():

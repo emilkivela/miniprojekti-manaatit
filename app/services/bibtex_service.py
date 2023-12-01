@@ -1,18 +1,12 @@
 
 class BibtexService:
 
-    def __init__(self, filename, books, articles):
-        self._filename = filename
-        self._books = self._escape_special_chars(books)
-        self._articles = self._escape_special_chars(articles)
+    def __init__(self, books, articles):
+        self._books = books
+        self._articles = articles
+        self._init_refs()
 
-    def create_bibtex_file(self):
-        bibtex_str = self._generate_bibtex_str()
-
-        with open("app/" + self._filename, "w", encoding="utf-8") as file:
-            file.write(bibtex_str)
-
-    def _generate_bibtex_str(self):
+    def generate_bibtex_str(self):
         bibtex_str = ""
 
         for book in self._books:
@@ -22,6 +16,10 @@ class BibtexService:
             bibtex_str += self._stringity_article(article)
 
         return bibtex_str
+    
+    def _init_refs(self):
+        self._books = self._escape_special_chars(self._books)
+        self._articles = self._escape_special_chars(self._articles)
 
     def _stringify_book(self, book):
         return (
