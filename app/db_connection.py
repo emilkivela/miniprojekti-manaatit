@@ -2,7 +2,6 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from app.app import app
-from sqlalchemy.sql import text
 
 
 load_dotenv()   # take environment variables from .env
@@ -17,9 +16,6 @@ dbname = conn_str_params['dbname']
 DATABASE_URI = f"postgresql+psycopg2://{dbuser}:{dbpass}@{dbhost}/{dbname}"
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URI
 db = SQLAlchemy(app)
-
-db.session.execute(text("DROP TABLE books"))
-db.session.execute(text("DROP TABLE articles"))
 
 class Books(db.Model):
     __tablename__= "books"
