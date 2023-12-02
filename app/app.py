@@ -35,6 +35,18 @@ def download():
                      mimetype="application/x-bibtex"
                      )
 
+def key_exists(key):
+
+    result_books = db.session.execute(
+    text("SELECT EXISTS(SELECT 1 FROM books WHERE refkey = :key)"), {"key": key})
+    exists_books = result_books.scalar()
+
+    result_articles = db.session.execute(
+    text("SELECT EXISTS(SELECT 1 FROM articles WHERE refkey = :key)"), {"key": key})
+    exists_articles = result_articles.scalar()
+
+    return exists_books or exists_articles
+
 @app.route("/create_book", methods=["POST"])
 def create_book():
     key = request.form["key"]
@@ -47,6 +59,9 @@ def create_book():
 
     if not year.isdigit():
         return render_template("new.html", error="Year must be a number")
+
+    if key_exists(key):
+        return render_template("new.html", error="Key already exists")
 
     sql = "INSERT INTO books (refkey, title, author, pubYear) VALUES (:key, :title, :author, :year)"
     db.session.execute(text(sql), {"key": key, "title": title, "author": author, "year": year})
@@ -71,6 +86,9 @@ def create_article():
 
     if not year.isdigit():
         return render_template("new.html", error="Year must be a number")
+
+    if key_exists(key):
+        return render_template("new.html", error="Key already exists")
 
     sql = "INSERT INTO articles (refkey, title, author, journal, pubyear, volume, pages) "\
           "VALUES (:key, :title, :author, :journal, :year, :volume, :pages)"
