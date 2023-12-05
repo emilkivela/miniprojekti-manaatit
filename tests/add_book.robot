@@ -6,13 +6,13 @@ Test Setup  Go To Book Adding Page
 
 *** Test Cases ***
 Add Book With Valid Info
-    Set Key  AAA
+    Set Key  XXX
     Set Title  Jdsfh Yeshd
     Set Author  Ewdkos Kdiffs
     Set Year  1876
     Submit Info
     Index Page Should Be Open
-    Page Should Contain  SFGH
+    Page Should Contain  XXX
     Page Should Contain  Jdsfh Yeshd
     Page Should Contain  Ewdkos Kdiffs
     Page Should Contain  1876

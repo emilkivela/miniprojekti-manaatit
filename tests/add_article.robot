@@ -15,7 +15,7 @@ Add Article With Valid Info
     Set Pages  145-6
     Submit Info
     Index Page Should Be Open
-    Page Should Contain  SFGH
+    Page Should Contain  AAA
     Page Should Contain  Jdsfh Yeshd
     Page Should Contain  Ewdkos Kdiffs
     Page Should Contain  Gehsilhw
