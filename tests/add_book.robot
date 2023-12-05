@@ -6,7 +6,7 @@ Test Setup  Go To Book Adding Page
 
 *** Test Cases ***
 Add Book With Valid Info
-    Set Key  SFGH
+    Set Key  AAA
     Set Title  Jdsfh Yeshd
     Set Author  Ewdkos Kdiffs
     Set Year  1876
@@ -26,7 +26,7 @@ Add Book With Key Missing
     Page Should Contain  All fields must be filled
 
 Add Book With Title Missing
-    Set Key  SFGH
+    Set Key  BBB
     Set Author  Ewdkos Kdiffs
     Set Year  1876
     Submit Info
@@ -34,7 +34,7 @@ Add Book With Title Missing
     Page Should Contain  All fields must be filled
 
 Add Book With Author Missing
-    Set Key  SFGH
+    Set Key  CCC
     Set Title  Jdsfh Yeshd
     Set Year  1876
     Submit Info
@@ -42,7 +42,7 @@ Add Book With Author Missing
     Page Should Contain  All fields must be filled
 
 Add Book With Year Missing
-    Set Key  SFGH
+    Set Key  DDD
     Set Title  Jdsfh Yeshd
     Set Author  Ewdkos Kdiffs
     Submit Info
@@ -50,7 +50,7 @@ Add Book With Year Missing
     Page Should Contain  All fields must be filled
 
 Add Book With Non-Numeric Year
-    Set Key  SFGH
+    Set Key  EEE
     Set Title  Jdsfh Yeshd
     Set Author  Ewdkos Kdiffs
     Set Year  18r6

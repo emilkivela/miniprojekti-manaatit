@@ -6,7 +6,7 @@ Test Setup  Go To Article Adding Page
 
 *** Test Cases ***
 Add Article With Valid Info
-    Set Key  SFGH
+    Set Key  AAA
     Set Title  Jdsfh Yeshd
     Set Author  Ewdkos Kdiffs
     Set Journal  Gehsilhw
@@ -35,7 +35,7 @@ Add Article With Key Missing
     Page Should Contain  All fields must be filled
 
 Add Article With Title Missing
-    Set Key  SFGH
+    Set Key  BBB
     Set Author  Ewdkos Kdiffs
     Set Journal  Gehsilhw
     Set Year  1876
@@ -46,7 +46,7 @@ Add Article With Title Missing
     Page Should Contain  All fields must be filled
 
 Add Article With Author Missing
-    Set Key  SFGH
+    Set Key  CCC
     Set Title  Jdsfh Yeshd
     Set Journal  Gehsilhw
     Set Year  1876
@@ -57,7 +57,7 @@ Add Article With Author Missing
     Page Should Contain  All fields must be filled
 
 Add Article With Journal Missing
-    Set Key  SFGH
+    Set Key  DDD
     Set Title  Jdsfh Yeshd
     Set Author  Ewdkos Kdiffs
     Set Year  1876
@@ -68,7 +68,7 @@ Add Article With Journal Missing
     Page Should Contain  All fields must be filled
 
 Add Article With Year Missing
-    Set Key  SFGH
+    Set Key  EEE
     Set Title  Jdsfh Yeshd
     Set Author  Ewdkos Kdiffs
     Set Journal  Gehsilhw
@@ -79,7 +79,7 @@ Add Article With Year Missing
     Page Should Contain  All fields must be filled
 
 Add Article With Non-Numeric Year
-    Set Key  SFGH
+    Set Key  FFF
     Set Title  Jdsfh Yeshd
     Set Author  Ewdkos Kdiffs
     Set Journal  Gehsilhw
@@ -91,7 +91,7 @@ Add Article With Non-Numeric Year
     Page Should Contain  Year must be a number
 
 Add Article With Volume Missing
-    Set Key  SFGH
+    Set Key  GGG
     Set Title  Jdsfh Yeshd
     Set Author  Ewdkos Kdiffs
     Set Journal  Gehsilhw
@@ -102,7 +102,7 @@ Add Article With Volume Missing
     Page Should Contain  All fields must be filled
 
 Add Article With Pages Missing
-    Set Key  SFGH
+    Set Key  HHH
     Set Title  Jdsfh Yeshd
     Set Author  Ewdkos Kdiffs
     Set Journal  Gehsilhw
