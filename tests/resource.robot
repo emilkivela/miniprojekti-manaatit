@@ -1,6 +1,7 @@
 *** Settings ***
 Library  SeleniumLibrary
 Library  OperatingSystem
+Library  AppLibrary.py
 
 *** Variables ***
 ${SERVER}  localhost:5000
@@ -18,6 +19,10 @@ Open And Configure Browser
     Call Method  ${options}  add_experimental_option  prefs  ${prefs}
     Open Browser  browser=chrome  options=${options}
     Set Selenium Speed  ${DELAY}
+
+Close Browser And Clear Database
+    Close Browser
+    Clear Database
 
 Go To Ref Adding Page
     Go To  ${ADDING_URL}

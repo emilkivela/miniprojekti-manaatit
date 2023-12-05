@@ -1,8 +1,8 @@
 *** Settings ***
-Resource  resource.robot
+Resource  book_resource.robot
 Suite Setup  Open And Configure Browser
-Suite Teardown  Close Browser
-Test Setup  Go To Book Adding Page
+Suite Teardown  Close Browser And Clear Database
+Test Setup  Go To Book Adding Page And Clear Database
 
 *** Test Cases ***
 Add Book With Valid Info
@@ -57,28 +57,3 @@ Add Book With Non-Numeric Year
     Submit Info
     Wait Until Page Contains  Create reference
     Page Should Contain  Year must be a number
-
-*** Keywords ***
-Submit Info
-    Click Button  Create reference
-
-Set Key
-    [Arguments]  ${key}
-    Input Text  key  ${key}
-
-Set Title
-    [Arguments]  ${title}
-    Input Text  title  ${title}
-
-Set Author
-    [Arguments]  ${author}
-    Input Text  author  ${author}
-
-Set Year
-    [Arguments]  ${year}
-    Input Text  year  ${year}
-
-Go To Book Adding Page
-    Go To Ref Adding Page
-    Click Button  showbook
-    Book Adding Page Should Be Open
