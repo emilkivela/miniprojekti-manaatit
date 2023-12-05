@@ -36,5 +36,11 @@ class Articles(db.Model):
     volume = db.Column(db.String(200), nullable=True)
     pages = db.Column(db.String(200), nullable=True)
 
+class Users(db.Model):
+    __tablename__ = "users"
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(200), nullable=True)
+    password = db.Column(db.String(200), nullable=True)
+
 with app.app_context():
     db.create_all()

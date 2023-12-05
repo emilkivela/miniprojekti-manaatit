@@ -7,6 +7,7 @@ from app.services.bibtex_service import BibtexService
 app = Flask(__name__)
 
 from app.db_connection import db
+from app import users
 @app.route("/")
 def index():
     result = db.session.execute(text("SELECT * FROM books"))
@@ -14,6 +15,19 @@ def index():
     result = db.session.execute(text("SELECT * FROM articles"))
     articles = result.fetchall()
     return render_template("index.html", books=books, articles=articles)
+
+@app.route("/register")
+def register():
+    return render_template("register.html")
+
+@app.route("/send_registration", methods=["POST"])
+def send_registration():
+    username = request.form["username"]
+    password = request.form["password"]
+    error = users.register(username, password)
+    if error:
+        return render_template("register.html", error = error)
+    return redirect("/")
 
 @app.route("/new")
 def new():
