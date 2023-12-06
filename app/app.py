@@ -1,20 +1,46 @@
+import secrets
 from io import BytesIO
 from flask import Flask
-from flask import redirect, render_template, request, send_file
+from flask import redirect, render_template, request, send_file, session
 from sqlalchemy.sql import text
 from app.services.bibtex_service import BibtexService
 
 app = Flask(__name__)
+app.secret_key = secrets.token_urlsafe(16)
+
 
 from app.db_connection import db
 from app import users
+
 @app.route("/")
 def index():
+    #if not "username" in session:
+    #    return redirect("/login")
     result = db.session.execute(text("SELECT * FROM books"))
     books = result.fetchall()
     result = db.session.execute(text("SELECT * FROM articles"))
     articles = result.fetchall()
     return render_template("index.html", books=books, articles=articles)
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if "username" in session:
+        return redirect("/")
+    error = None
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        logged_in_succesfully = users.login(username, password)
+        if logged_in_succesfully:
+            return redirect("/")
+        error = "Wrong username or password"
+
+    return render_template("login.html", error=error)
+
+@app.route("/logout")
+def logout():
+    users.logout()
+    return redirect("/")
 
 @app.route("/register")
 def register():

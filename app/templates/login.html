@@ -1,0 +1,10 @@
+{% if error %}
+    {{ error }}
+{% endif %}
+
+<form action="/login" method="POST">
+    Username:
+    <input type="text" id="username" name="username">
+    Password:
+    <input type="password" id="password" name="password">
+    <button type="submit">login
