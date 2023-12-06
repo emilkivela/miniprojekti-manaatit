@@ -1,4 +1,4 @@
-import secrets
+from os import getenv
 from io import BytesIO
 from flask import Flask
 from flask import redirect, render_template, request, send_file, session
@@ -6,8 +6,7 @@ from sqlalchemy.sql import text
 from app.services.bibtex_service import BibtexService
 
 app = Flask(__name__)
-app.secret_key = secrets.token_urlsafe(16)
-
+app.secret_key = getenv("SECRET_KEY")
 
 from app.db_connection import db
 from app import users
