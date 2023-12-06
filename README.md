@@ -27,7 +27,7 @@
 - Suorita Robot framework -testit ajamalla virtuaaliympäristössä komento ``` robot tests ``` juurihakemistossa
   - Sovelluksen tulee olla samalla käynnissä paikallisesti (kts. ohjeet yllä)
   - Lisäksi joko ChromeDriverin tai GeckoDriverin tulee olla asennettuna (kts. ohjeet esim. [täällä](https://ohjelmistotuotanto-hy.github.io/tehtavat3/#5-web-sovelluksen-testaaminen-osa-1))
-- Suorita Pylint-tarkastukset app-hakemiston tiedostoille ajamalla virtuaaliympäristössä komento ``` pylint app ``` projektin juurihakemistossa (tests-hakemistolle vastaavasti ``` pylint tests ```)
+- Suorita Pylint-tarkastukset ajamalla virtuaaliympäristössä komento ``` pylint app tests ``` projektin juurihakemistossa
 - Muodosta haarautumakattavuusraportti ajamalla virtuaaliympäristössä komento ``` coverage run --branch -m pytest; coverage html ``` projektin juurihakemistossa
 
 ## Definition of Done
