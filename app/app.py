@@ -136,3 +136,30 @@ def create_article():
                                    "year": year, "volume": volume, "pages": pages})
     db.session.commit()
     return redirect("/")
+
+@app.route("/remove_reference", methods=["POST","GET"])
+def remove_reference():
+    refkey = request.form["refkey"]
+    if key_in_books(refkey):
+        sql = "DELETE FROM books WHERE refkey=:refkey"
+        db.session.execute(text(sql), {"refkey": refkey})
+        db.session.commit()
+        return redirect("/")
+    if key_in_articles(refkey):
+        sql = "DELETE FROM articles WHERE refkey=:refkey"
+        db.session.execute(text(sql), {"refkey": refkey})
+        db.session.commit()
+        return redirect("/")
+    return redirect("/")
+
+def key_in_books(refkey):
+    result = db.session.execute(
+    text("SELECT EXISTS(SELECT 1 FROM books WHERE refkey=:refkey)"), {"refkey": refkey})
+    exists = result.scalar()
+    return exists
+
+def key_in_articles(refkey):
+    result = db.session.execute(
+    text("SELECT EXISTS(SELECT 1 FROM articles WHERE refkey=:refkey)"), {"refkey": refkey})
+    exists = result.scalar()
+    return exists

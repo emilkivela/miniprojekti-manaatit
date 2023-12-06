@@ -15,7 +15,6 @@
         <a href="{{url_for('download')}}"> Download file</a>
         <h3>Book-references</h3>
         {% for book in books %}
-        <br>
         <p>
             Key: {{ book[1] }}<br>
             Title: {{ book[2] }}<br>
@@ -23,10 +22,8 @@
             Year: {{ book[4] }}
         </p>
         {% endfor %}
-        <br>
         <h3>Article-references</h3>
         {% for article in articles %}
-        <br>
         <p>
             Key: {{ article[1] }}<br>
             Title: {{ article[2] }}<br>
@@ -37,6 +34,12 @@
             Pages: {{ article[7] }}
         </p>
         {% endfor %}
+        <h3>Remove reference</h3>
+        <form action="/remove_reference" method="post">
+            Reference key:<br>
+            <input type="text" id="refkey" name="refkey"><br><br>
+            <input type="submit" value="Remove reference">
+        </form>
     </body>
 </html>
     
