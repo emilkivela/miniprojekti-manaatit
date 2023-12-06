@@ -1,5 +1,14 @@
 #!/bin/bash
 
+process_exists () {
+  if [[ $(ps --no-headers -p $1) ]]
+  then
+    return 0
+  else
+    return 1
+  fi
+}
+
 SERVER_ADDRESS=0.0.0.0:8000
 
 # käynnistetään gunicorn-palvelin taustalle
@@ -14,7 +23,7 @@ do
   ((i++))
   if [[ $i -gt 60 ]]
   then
-    if [[ $(ps --no-headers -p $gunicorn_pid) ]]
+    if process_exists $gunicorn_pid
     then
       kill $gunicorn_pid
     fi
@@ -28,7 +37,7 @@ robot --variable SERVER:$SERVER_ADDRESS tests
 status=$?
 
 # pysäytetään gunicorn-palvelin
-if [[ $(ps --no-headers -p $gunicorn_pid) ]]
+if process_exists $gunicorn_pid
 then
   kill $gunicorn_pid
 fi
