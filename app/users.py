@@ -8,11 +8,11 @@ def login(username, password):
     sql = "SELECT id, password FROM users WHERE username=:username"
     result = db.session.execute(text(sql), {"username":username})
     user = result.fetchone()
-
-    if user and check_password_hash(user.password, password):
+    if user is not None and check_password_hash(user.password, password):
         session["username"] = username
         session["userid"] = user.id
         session["csrf_token"] = secrets.token_hex(16)
+        return True
 
     return False
 
