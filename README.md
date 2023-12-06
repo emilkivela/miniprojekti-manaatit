@@ -12,7 +12,8 @@
    - ``` käyttäjätähän ``` on käyttäjänimesi PostGreSQL:ssä omalla koneellasi
    - ``` salasanatähän ``` on kyseisen käyttäjän salasana
    - (Jos et ole vielä asettanut PostGreSQL:ssä salasanaa, niin sen voi tehdä SQL-komennolla ``` ALTER USER käyttäjätähän WITH PASSWORD 'salasanatähän'; ```)
-5. Käynnistä sovellus ajamalla komento ``` flask -A app/app run ``` juurihakemistossa
+5. Lisää secret key komennolla ``` export SECRET_KEY=jokusecretkeytähän ```
+6. Käynnistä sovellus ajamalla komento ``` flask -A app/app run ``` juurihakemistossa
 
 ## Sovelluksen käynnistäminen Azuressa
 1. Käytä Azure App Servicesiä, joka sisältää PostqreSQL-tietokannan
