@@ -69,8 +69,8 @@ Registration Page Should Be Open
     Page Should Contain Button  Sign up
 
 Login Page Should Be Open
-    Wait Until Page Contains  Login
-    Page Should Contain Button  Login
+    Wait Until Page Contains  Sign in
+    Page Should Contain Button  Sign in
 
 Add Reference
     [Arguments]  &{reference}
