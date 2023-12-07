@@ -13,7 +13,7 @@ def key_in_articles(refkey):
     exists = result.scalar()
     return exists
 
-def create_article(key, title, author, journal, year, volume, pages):
+def create_article(key, title, author, journal, year, volume, pages):  # pylint: disable=too-many-arguments
     sql = "INSERT INTO articles (refkey, title, author, journal, pubyear, volume, pages) "\
           "VALUES (:key, :title, :author, :journal, :year, :volume, :pages)"
     db.session.execute(text(sql), {"key": key, "title": title, "author": author, "journal": journal,
@@ -24,4 +24,3 @@ def delete_reference(refkey):
     sql = "DELETE FROM articles WHERE refkey=:refkey"
     db.session.execute(text(sql), {"refkey": refkey})
     db.session.commit()
-    

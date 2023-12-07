@@ -1,6 +1,6 @@
 from sqlalchemy.sql import text
 from app.app import app
-from app.app import db
+from app.db_connection import db
 
 def test_opening_ref_creation_page(client):
     response = client.get("/new")
