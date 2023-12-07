@@ -8,6 +8,8 @@ ${SERVER}  localhost:5000
 ${DELAY}  0 seconds
 ${INDEX_URL}  http://${SERVER}/
 ${ADDING_URL}  http://${SERVER}/new
+${REGISTRATION_URL}  http://${SERVER}/register
+${LOGIN_URL}  http://${SERVER}/login
 ${DOWNLOAD_DIR}  ${CURDIR}/test_downloads
 
 *** Keywords ***
@@ -30,6 +32,12 @@ Go To Ref Adding Page
 Go To Home Page
     Go To  ${INDEX_URL}
 
+Go To Registration Page
+    Go To  ${REGISTRATION_URL}
+
+Go To Login Page
+    Go To  ${LOGIN_URL}
+
 Book Adding Page Should Be Open
     Location Should Be  ${ADDING_URL}
     Page Should Contain  Create reference
@@ -43,3 +51,7 @@ Article Adding Page Should Be Open
 Index Page Should Be Open
     Wait Until Location Is  ${INDEX_URL}
     Title Should Be  Main page
+
+Registration Page Should Be Open
+    Wait Until Page Contains  Create account
+    Page Should Contain Button  Sign up
