@@ -29,6 +29,12 @@ Close Browser And Clear Database
 Go To Ref Adding Page
     Go To  ${ADDING_URL}
 
+Go To Ref Adding Page For
+    [Arguments]  ${type}
+    Go To Ref Adding Page
+    Click Button  show${type}
+    Ref Adding Page Should Be Open For  ${type}
+
 Go To Home Page
     Go To  ${INDEX_URL}
 
@@ -37,6 +43,12 @@ Go To Registration Page
 
 Go To Login Page
     Go To  ${LOGIN_URL}
+
+Ref Adding Page Should Be Open For
+    [Arguments]  ${type}
+    Location Should Be  ${ADDING_URL}
+    Page Should Contain  Create reference
+    Radio Button Should Be Set To  reftype  show${type}
 
 Book Adding Page Should Be Open
     Location Should Be  ${ADDING_URL}
@@ -55,3 +67,38 @@ Index Page Should Be Open
 Registration Page Should Be Open
     Wait Until Page Contains  Create account
     Page Should Contain Button  Sign up
+
+Add Reference
+    [Arguments]  &{reference}
+    Go To Ref Adding Page For  ${reference}[type]
+    Set Local Variable  ${parent_id}  ${reference}[type]
+    FOR  ${field}  ${value}  IN  &{reference}
+        Set Local Variable  ${input_id}  ${field}
+        IF  $field != "type"
+            Input Text  css:#${parent_id} #${input_id}  ${value}
+        END
+    END
+    Click Button  css:#${parent_id} input[value="Create reference"]
+    Index Page Should Be Open
+    Set Suite Variable  &{LATEST_REFERENCE}  &{reference}
+
+Adding Reference Should Succeed
+    ${exists} =  Get Variable Value  ${LATEST_REFERENCE}
+    IF  $exists is None
+        Fail  ERROR: Attempted to call 'Adding Reference Should Succeed' without first calling 'Add Reference'
+    END
+    FOR  ${field}  ${value}  IN  &{LATEST_REFERENCE}
+        IF  $field != "type"
+            Page Should Contain  ${value}
+        END
+    END
+
+Reference Should Exist
+    [Arguments]  &{reference}
+    Go To Home Page
+    Page Should Contain  ${reference}[key]
+
+Reference Should Not Exist
+    [Arguments]  &{reference}
+    Go To Home Page
+    Page Should Not Contain  ${reference}[key]
