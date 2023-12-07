@@ -42,7 +42,7 @@ Log In With Credentials
     Go To Login Page
     Input Text  username  ${username}
     Input Text  password  ${password}
-    Click Button  Login
+    Click Button  Sign in
 
 Login Should Succeed
     Index Page Should Be Open
