@@ -7,8 +7,8 @@ from app import users, book_functions, article_functions
 
 @app.route("/")
 def index():
-    #if not "username" in session:
-    #    return redirect("/login")
+    if not "username" in session:
+        return redirect("/login")
     books = book_functions.get_books()
     articles = article_functions.get_articles()
     return render_template("index.html", books=books, articles=articles)
@@ -47,6 +47,8 @@ def send_registration():
 
 @app.route("/new")
 def new():
+    if not "username" in session:
+        return redirect("/login")
     return render_template("new.html")
 
 @app.route("/download")
