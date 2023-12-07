@@ -1,7 +1,7 @@
-from app.app import app
 from io import BytesIO
-from app.services.bibtex_service import BibtexService
 from flask import redirect, render_template, request, send_file, session
+from app.services.bibtex_service import BibtexService
+from app.app import app
 from app import users, book_functions, article_functions
 
 
@@ -122,6 +122,3 @@ def remove_reference():
         article_functions.delete_reference(refkey)
         return redirect("/")
     return redirect("/")
-
-
-

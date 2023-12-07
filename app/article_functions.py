@@ -1,5 +1,6 @@
-from app.db_connection import db
 from sqlalchemy.sql import text
+from app.db_connection import db
+
 
 def get_articles():
     articles = db.session.execute(text("SELECT * FROM articles")).fetchall()
@@ -23,3 +24,4 @@ def delete_reference(refkey):
     sql = "DELETE FROM articles WHERE refkey=:refkey"
     db.session.execute(text(sql), {"refkey": refkey})
     db.session.commit()
+    
