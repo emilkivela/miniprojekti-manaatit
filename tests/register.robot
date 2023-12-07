@@ -20,29 +20,3 @@ Log In With Registered Credentials
     Registration Should Succeed
     Log In With Credentials  uwelfew  4839r84h
     Login Should Succeed
-
-*** Keywords ***
-Register With Credentials
-    [Arguments]  ${username}  ${password}
-    Go To Registration Page
-    Input Text  username  ${username}
-    Input Text  password  ${password}
-    Click Button  Sign up
-
-Registration Should Succeed
-    Index Page Should Be Open
-
-Registration Should Fail With Message
-    [Arguments]  ${message}
-    Registration Page Should Be Open
-    Page Should Contain  ${message}
-
-Log In With Credentials
-    [Arguments]  ${username}  ${password}
-    Go To Login Page
-    Input Text  username  ${username}
-    Input Text  password  ${password}
-    Click Button  Sign in
-
-Login Should Succeed
-    Index Page Should Be Open

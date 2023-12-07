@@ -1,7 +1,7 @@
 *** Settings ***
 Resource  resource.robot
 Resource  book_resource.robot
-Suite Setup  Open And Configure Browser
+Suite Setup  Run Keywords  Open And Configure Browser  AND  Register Test User And Login
 Suite Teardown  Close Browser And Clear Database
 Test Setup  Clear Database
 

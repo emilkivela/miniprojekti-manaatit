@@ -1,6 +1,6 @@
 *** Settings ***
 Resource  resource.robot
-Suite Setup  Open And Configure Browser
+Suite Setup  Run Keywords  Open And Configure Browser  AND  Register Test User And Login
 Suite Teardown  Close Browser And Clear Database
 Test Setup  Go To Article Adding Page And Clear Database
 

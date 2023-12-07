@@ -1,6 +1,6 @@
 *** Settings ***
 Resource  resource.robot
-Suite Setup  Open And Configure Browser
+Suite Setup  Run Keywords  Open And Configure Browser  AND  Register Test User And Login
 Suite Teardown  Run Keywords  Close Browser  AND  Clear Database
 Test Setup  Run Keywords  Clear Database  AND  Create Test References
 

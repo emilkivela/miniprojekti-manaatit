@@ -68,6 +68,10 @@ Registration Page Should Be Open
     Wait Until Page Contains  Create account
     Page Should Contain Button  Sign up
 
+Login Page Should Be Open
+    Wait Until Page Contains  Login
+    Page Should Contain Button  Login
+
 Add Reference
     [Arguments]  &{reference}
     Go To Ref Adding Page For  ${reference}[type]
@@ -102,3 +106,32 @@ Reference Should Not Exist
     [Arguments]  &{reference}
     Go To Home Page
     Page Should Not Contain  ${reference}[key]
+
+Register With Credentials
+    [Arguments]  ${username}  ${password}
+    Go To Registration Page
+    Input Text  username  ${username}
+    Input Text  password  ${password}
+    Click Button  Sign up
+
+Register Test User And Login
+    Register With Credentials  testuser  testuser1234
+    Log In With Credentials  testuser  testuser1234
+
+Registration Should Succeed
+    Login Page Should Be Open
+
+Registration Should Fail With Message
+    [Arguments]  ${message}
+    Registration Page Should Be Open
+    Page Should Contain  ${message}
+
+Log In With Credentials
+    [Arguments]  ${username}  ${password}
+    Go To Login Page
+    Input Text  username  ${username}
+    Input Text  password  ${password}
+    Click Button  Sign in
+
+Login Should Succeed
+    Index Page Should Be Open
