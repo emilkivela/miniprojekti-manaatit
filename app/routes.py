@@ -8,7 +8,7 @@ from app import users, book_functions, article_functions
 def login_required(f):
     @wraps(f)
     def login_check(*args, **kwargs):
-        if not "username" in session:
+        if 'username' not in session:
             return redirect("/login")
         return f(*args, **kwargs)
     return login_check
@@ -55,8 +55,6 @@ def send_registration():
 @app.route("/new")
 @login_required
 def new():
-    if not "username" in session:
-        return redirect("/login")
     return render_template("new.html")
 
 @app.route("/download")

@@ -22,4 +22,3 @@ def delete_reference(refkey):
     sql = "DELETE FROM books WHERE refkey=:refkey"
     db.session.execute(text(sql), {"refkey": refkey})
     db.session.commit()
-    
