@@ -1,14 +1,21 @@
 from io import BytesIO
+from functools import wraps
 from flask import redirect, render_template, request, send_file, session
 from app.services.bibtex_service import BibtexService
 from app.app import app
 from app import users, book_functions, article_functions
 
+def login_required(f):
+    @wraps(f)
+    def login_check(*args, **kwargs):
+        if not "username" in session:
+            return redirect("/login")
+        return f(*args, **kwargs)
+    return login_check
 
 @app.route("/")
+@login_required
 def index():
-    if not "username" in session:
-        return redirect("/login")
     books = book_functions.get_books()
     articles = article_functions.get_articles()
     return render_template("index.html", books=books, articles=articles)
@@ -46,12 +53,14 @@ def send_registration():
     return redirect("/")
 
 @app.route("/new")
+@login_required
 def new():
     if not "username" in session:
         return redirect("/login")
     return render_template("new.html")
 
 @app.route("/download")
+@login_required
 def download():
     books = book_functions.get_books()
     articles = article_functions.get_articles()
@@ -71,6 +80,7 @@ def key_exists(key):
     return exists_books or exists_articles
 
 @app.route("/create_book", methods=["POST"])
+@login_required
 def create_book():
     key = request.form["key"]
     title = request.form["title"]
@@ -90,6 +100,7 @@ def create_book():
     return redirect("/")
 
 @app.route("/create_article", methods=["POST"])
+@login_required
 def create_article():
     key = request.form["key"]
     title = request.form["title"]
@@ -115,6 +126,7 @@ def create_article():
     return redirect("/")
 
 @app.route("/remove_reference", methods=["POST","GET"])
+@login_required
 def remove_reference():
     refkey = request.form["refkey"]
     if book_functions.key_in_books(refkey):
