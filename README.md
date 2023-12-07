@@ -7,13 +7,17 @@
 1. Luo virtuaaliympäristö komennolla ``` python3 -m venv venv ```
 2. Siirry virtuaaliympäristöön komennolla ``` source venv/bin/activate ```
 3. Asenna riippuvuudet komennolla ``` pip install -r requirements.txt ```
-4. Tallenna .env-tiedostoon juurihakemistossa ympäristömuuttujan määrittely ``` AZURE_POSTGRESQL_CONNECTIONSTRING='host=localhost:5432 dbname=tietokannannimi user=käyttäjätähän password=salasanatähän' ```
+4. Tallenna .env-tiedostoon juurihakemistossa ympäristömuuttujien määrittelyt:
+   ```
+   AZURE_POSTGRESQL_CONNECTIONSTRING='host=localhost:5432 dbname=tietokannannimi user=käyttäjätähän password=salasanatähän'
+   SECRET_KEY=jokusecretkeytähän
+   ```
    - ``` tietokannannimi ``` on tätä sovellusta varten omalle koneellesi luomasi tietokannan nimi
    - ``` käyttäjätähän ``` on käyttäjänimesi PostGreSQL:ssä omalla koneellasi
    - ``` salasanatähän ``` on kyseisen käyttäjän salasana
    - (Jos et ole vielä asettanut PostGreSQL:ssä salasanaa, niin sen voi tehdä SQL-komennolla ``` ALTER USER käyttäjätähän WITH PASSWORD 'salasanatähän'; ```)
-5. Lisää secret key komennolla ``` export SECRET_KEY=jokusecretkeytähän ```
-6. Käynnistä sovellus ajamalla komento ``` flask -A app/app run ``` juurihakemistossa
+   - ``` jokusecretkeytähän ``` on mikä vain vapaasti valitsemasi merkkijono
+5. Käynnistä sovellus ajamalla komento ``` flask -A app/app run ``` juurihakemistossa
 
 ## Sovelluksen käynnistäminen Azuressa
 1. Käytä Azure App Servicesiä, joka sisältää PostqreSQL-tietokannan
@@ -24,9 +28,8 @@
 
 ## Testit
 - Suorita yksikkötestit virtuaaliympäristössä ajamalla komento ``` pytest ``` juurihakemistossa
-- Suorita Robot framework -testit ajamalla virtuaaliympäristössä komento ``` robot tests ``` juurihakemistossa
-  - Sovelluksen tulee olla samalla käynnissä paikallisesti (kts. ohjeet yllä)
-  - Lisäksi joko ChromeDriverin tai GeckoDriverin tulee olla asennettuna (kts. ohjeet esim. [täällä](https://ohjelmistotuotanto-hy.github.io/tehtavat3/#5-web-sovelluksen-testaaminen-osa-1))
+- Suorita Robot framework -testit käynnistämällä ensin sovellus yhdellä komentorivillä komennolla ``` flask -A app/app run ``` (aivan kuten yllä) ja ajamalla sitten toisella komentorivillä samaan tapaan virtuaaliympäristössä sovelluksen juurihakemistossa komento ``` robot tests ```
+  - (ChromeDriverista tai muista Drivereista ei tarvitse enää huolehtia itse, sillä nykyään Selenium asentaa tarvittavan Driverin ja kaiken sen tarvitseman automaattisesti)
 - Suorita Pylint-tarkastukset ajamalla virtuaaliympäristössä komento ``` pylint app tests ``` projektin juurihakemistossa
 - Muodosta haarautumakattavuusraportti ajamalla virtuaaliympäristössä komento ``` coverage run --branch -m pytest; coverage html ``` projektin juurihakemistossa
 
