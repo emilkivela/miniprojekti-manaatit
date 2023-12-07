@@ -4,7 +4,7 @@
         <title>Main page</title>
 
         <!-- Bootstrap CSS -->
-         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     </head>
     <body>
@@ -14,26 +14,58 @@
         </form>
         <a href="{{url_for('download')}}"> Download file</a>
         <h3>Book-references</h3>
-        {% for book in books %}
-        <p>
-            Key: {{ book[1] }}<br>
-            Title: {{ book[2] }}<br>
-            Author: {{ book[3] }}<br>
-            Year: {{ book[4] }}
-        </p>
-        {% endfor %}
+        <table border=1 class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Key:</th>
+              <th scope="col">Title:</th>
+              <th scope="col">Author:</th>
+              <th scope="col">Year:</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for book in books %}
+          <p>
+            <tr>
+              <td>{{ book[1] }}</td>
+              <td>{{ book[2] }}</td>
+              <td>{{ book[3] }}</td>
+              <td>{{ book[4] }}</td>
+            </tr>
+          </p>
+          {% endfor %}
+          </tbody>
+        </table>
         <h3>Article-references</h3>
-        {% for article in articles %}
-        <p>
-            Key: {{ article[1] }}<br>
-            Title: {{ article[2] }}<br>
-            Author: {{ article[3] }}<br>
-            Journal: {{ article[4] }}<br>
-            Year: {{ article[5] }}<br>
-            Volume: {{ article[6] }}<br>
-            Pages: {{ article[7] }}
-        </p>
-        {% endfor %}
+        <table border="1" class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Key:</th>
+              <th scope="col">Title:</th>
+              <th scope="col">Author:</th>
+              <th scope="col">Journal:</th>
+              <th scope="col">Year:</th>
+              <th scope="col">Volume:</th>
+              <th scope="col">Pages:</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for article in articles %}
+            <p>
+              <tr>
+                <td>{{ article[1] }}</td>
+                <td>{{ article[2] }}</td>
+                <td>{{ article[3] }}</td>
+                <td>{{ article[4] }}</td>
+                <td>{{ article[5] }}</td>
+                <td>{{ article[6] }}</td>
+                <td>{{ article[7] }}
+              </tr>
+            </p>
+            {% endfor %}
+          </tbody>
+        </table>
+        
         <h3>Remove reference</h3>
         <form action="/remove_reference" method="post">
             Reference key:<br>
