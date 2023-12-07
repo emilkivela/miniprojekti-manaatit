@@ -10,31 +10,31 @@
     </head>
     <body>
 
-    <div class="background"></div>
-
-    <div class="div-center">
-        <div class="div-content">
-            <h2>Login</h2>
-            {% if error %}
-                {{ error }}
-            {% endif %}
-            <form action="/login" method="POST">
-                <p>
-                <label for="username">Username:</label>
-                </p>
-                <p>
-                <input type="text" class="form-control" id="username" name="username">
-                </p>
-                <p>
-                <label for="password">Password:</label>
-                </p>
-                <p>
-                <input type="password" class="form-control" id="password" name="password">
-                </p>
-                <button type="submit" class="btn btn-primary">Login</button>
-            </form>
+    <div class="background">
+        <div class="div-center">
+            <div class="content">
+                <h2>Login</h2>
+                {% if error %}
+                    {{ error }}
+                {% endif %}
+                <form action="/login" method="POST">
+                    <p>
+                    <label for="username">Username:</label>
+                    </p>
+                    <p>
+                    <input type="text" class="form-control" id="username" name="username">
+                    </p>
+                    <p>
+                    <label for="password">Password:</label>
+                    </p>
+                    <p>
+                    <input type="password" class="form-control" id="password" name="password">
+                    </p>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
         </div>
-    </div>
+    
 
 </body>
 </html>
