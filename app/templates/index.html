@@ -74,10 +74,13 @@
         <h3>Remove reference</h3>
         <form action="/remove_reference" method="post">
             Reference key:<br>
-            <input type="text" id="refkey" name="refkey"><br><br>
+            <input type="text" id="refkey" name="refkey"><br>
+            {% if error %}
+                {{ error }}
+            {% endif %}
+            <br>
             <input type="submit" value="Remove reference">
         </form>
-
       </div> 
     </div>     
     </body>

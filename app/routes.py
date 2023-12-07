@@ -121,4 +121,7 @@ def remove_reference():
     if article_functions.key_in_articles(refkey):
         article_functions.delete_reference(refkey)
         return redirect("/")
-    return redirect("/")
+    error = "Key does not exist"
+    books = book_functions.get_books()
+    articles = article_functions.get_articles()
+    return render_template("index.html", books=books, articles=articles, error= error)
