@@ -16,8 +16,9 @@ def login_required(f):
 @app.route("/")
 @login_required
 def index():
-    books = book_functions.get_books()
-    articles = article_functions.get_articles()
+    user_id = session.get('user_id')
+    books = book_functions.get_books(user_id)
+    articles = article_functions.get_articles(user_id)
     return render_template("index.html", books=books, articles=articles)
 
 @app.route("/login", methods=["GET", "POST"])
@@ -60,8 +61,8 @@ def new():
 @app.route("/download")
 @login_required
 def download():
-    books = book_functions.get_books()
-    articles = article_functions.get_articles()
+    books = book_functions.get_books(session.get('user_id'))
+    articles = article_functions.get_articles(session.get('user_id'))
 
     bibtex_service = BibtexService(books, articles)
     bibtex_str = bibtex_service.generate_bibtex_str()
@@ -73,8 +74,9 @@ def download():
                      )
 
 def key_exists(key):
-    exists_books = book_functions.key_in_books(key)
-    exists_articles = article_functions.key_in_articles(key)
+    user_id = session.get('user_id')
+    exists_books = book_functions.key_in_books(key, user_id)
+    exists_articles = article_functions.key_in_articles(key, user_id)
     return exists_books or exists_articles
 
 @app.route("/create_book", methods=["POST"])
@@ -85,6 +87,7 @@ def create_book():
     author = request.form["author"]
     year = request.form["year"]
     publisher = request.form["publisher"]
+    user_id = session.get('user_id')
 
     if not key or not title or not author or not year or not publisher:
         return render_template("new.html", error="All fields must be filled")
@@ -95,7 +98,7 @@ def create_book():
     if key_exists(key):
         return render_template("new.html", error="Key already exists")
 
-    book_functions.create_book(key, title, author, year, publisher)
+    book_functions.create_book(key, title, author, year, publisher, user_id)
     return redirect("/")
 
 @app.route("/create_article", methods=["POST"])
@@ -108,6 +111,7 @@ def create_article():
     year = request.form["year"]
     volume = request.form["volume"]
     pages = request.form["pages"]
+    user_id = session.get('user_id')
 
     if not key or not title or not author or not journal:
         return render_template("new.html", error="All fields must be filled")
@@ -121,20 +125,21 @@ def create_article():
     if key_exists(key):
         return render_template("new.html", error="Key already exists")
 
-    article_functions.create_article(key, title, author, journal, year, volume, pages)
+    article_functions.create_article(key, title, author, journal, year, volume, pages, user_id)
     return redirect("/")
 
 @app.route("/remove_reference", methods=["POST","GET"])
 @login_required
 def remove_reference():
+    user_id = session.get('user_id')
     refkey = request.form["refkey"]
-    if book_functions.key_in_books(refkey):
+    if book_functions.key_in_books(refkey, user_id):
         book_functions.delete_reference(refkey)
         return redirect("/")
-    if article_functions.key_in_articles(refkey):
+    if article_functions.key_in_articles(refkey, user_id):
         article_functions.delete_reference(refkey)
         return redirect("/")
     error = "Key does not exist"
-    books = book_functions.get_books()
-    articles = article_functions.get_articles()
+    books = book_functions.get_books(session.get('user_id'))
+    articles = article_functions.get_articles(session.get('user_id'))
     return render_template("index.html", books=books, articles=articles, error= error)

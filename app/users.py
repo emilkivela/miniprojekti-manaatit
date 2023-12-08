@@ -10,7 +10,7 @@ def login(username, password):
     user = result.fetchone()
     if user is not None and check_password_hash(user.password, password):
         session["username"] = username
-        session["userid"] = user.id
+        session["user_id"] = user.id
         session["csrf_token"] = secrets.token_hex(16)
         return True
 

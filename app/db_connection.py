@@ -25,7 +25,9 @@ class Books(db.Model):
     author = db.Column(db.String(200), nullable=True)
     pubyear = db.Column(db.Integer, nullable=True)
     publisher = db.Column(db.String(200), nullable=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    #user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
+    user_id = db.Column(db.Integer, nullable=True)
 
 class Articles(db.Model):
     __tablename__= "articles"
@@ -37,15 +39,16 @@ class Articles(db.Model):
     pubyear = db.Column(db.Integer, nullable=True)
     volume = db.Column(db.String(200), nullable=True)
     pages = db.Column(db.String(200), nullable=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    #user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
+    user_id = db.Column(db.Integer, nullable=True)
 
 class Users(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(200), nullable=True)
     password = db.Column(db.String(200), nullable=True)
-    books = db.relationship('Books', backref='users')
-    articles = db.relationship('Articles', backref='users')
+
 
 with app.app_context():
     db.create_all()
