@@ -5,7 +5,7 @@ Suite Teardown  Run Keywords  Close Browser  AND  Clear Database
 Test Setup  Run Keywords  Clear Database  AND  Create Test References
 
 *** Variables ***
-&{TEST_REF1} =  type=book  key=ERDS  title=Sefrverij  author=Gewfj Oewjif  year=908
+&{TEST_REF1} =  type=book  key=ERDS  title=Sefrverij  author=Gewfj Oewjif  year=908  publisher=Oefhi
 &{TEST_REF2} =  type=article  key=WEF  title=Qtherok  author=Eqweji  journal=Ewfddf
 ...             year=1598  volume=4  pages=5
 &{TEST_REF3} =  type=article  key=OGV  title=Iefwfeqp  author=Pjwreif  journal=Vfjew

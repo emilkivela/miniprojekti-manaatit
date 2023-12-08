@@ -7,13 +7,7 @@ Test Setup  Clear Database
 
 *** Test Cases ***
 Download File
-    Go To Book Adding Page
-    Set Key  JOTT
-    Set Title  Jehi Rwifhe
-    Set Author  Peiwh Wihiq
-    Set Year  1678
-    Submit Info
-    Index Page Should Be Open
+    Add Reference  type=book  key=JOTT  title=Jehi Rwifhe  author=Peiwh Wihiq  year=1678  publisher=Hewfiow
     Remove File  ${DOWNLOAD_DIR}/references.bib
     Go To Home Page
     Index Page Should Be Open

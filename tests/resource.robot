@@ -83,7 +83,6 @@ Add Reference
         END
     END
     Click Button  css:#${parent_id} input[value="Create reference"]
-    Index Page Should Be Open
     Set Suite Variable  &{LATEST_REFERENCE}  &{reference}
 
 Adding Reference Should Succeed
@@ -91,11 +90,17 @@ Adding Reference Should Succeed
     IF  $exists is None
         Fail  ERROR: Attempted to call 'Adding Reference Should Succeed' without first calling 'Add Reference'
     END
+    Index Page Should Be Open
     FOR  ${field}  ${value}  IN  &{LATEST_REFERENCE}
         IF  $field != "type"
             Page Should Contain  ${value}
         END
     END
+
+Adding Reference Should Fail With Message
+    [Arguments]  ${message}
+    Wait Until Page Contains  Create reference
+    Page Should Contain  ${message}
 
 Reference Should Exist
     [Arguments]  &{reference}
