@@ -7,13 +7,15 @@ class TestBibtexService(unittest.TestCase):
                  'This name contains "quotation" marks', 
                  "This title contains $ sign", 
                  "Author contains {curly} braces", 
-                 "2001")
+                 "2001",
+                 "1")
 
         book2 = ("2",
                  "BOOK2", 
                  "Title B2", 
                  "Author B2", 
-                 "2002")
+                 "2002",
+                 "1")
 
         article1 = ("1",
                     "ARTICLE1", 
@@ -21,7 +23,8 @@ class TestBibtexService(unittest.TestCase):
                     "Author A1", 
                     "Journal A1", 
                     "2021", "1", 
-                    "11-12")
+                    "11-12",
+                    "1")
 
         article2 = ("2",
                     "ARTICLE2", 
@@ -30,7 +33,8 @@ class TestBibtexService(unittest.TestCase):
                     "Journal A2", 
                     "2022", 
                     "2", 
-                    "22-23")
+                    "22-23",
+                    "1")
 
         self.books = [book1, book2]
         self.articles = [article1, article2]
