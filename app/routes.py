@@ -134,10 +134,10 @@ def remove_reference():
     user_id = session.get('user_id')
     refkey = request.form["refkey"]
     if book_functions.key_in_books(refkey, user_id):
-        book_functions.delete_reference(refkey)
+        book_functions.delete_reference(refkey, user_id)
         return redirect("/")
     if article_functions.key_in_articles(refkey, user_id):
-        article_functions.delete_reference(refkey)
+        article_functions.delete_reference(refkey, user_id)
         return redirect("/")
     error = "Key does not exist"
     books = book_functions.get_books(session.get('user_id'))

@@ -23,7 +23,7 @@ def create_article(key, title, author, journal, year, volume, pages, user_id):  
                                     "user_id": user_id})
     db.session.commit()
 
-def delete_reference(refkey):
-    sql = "DELETE FROM articles WHERE refkey=:refkey"
-    db.session.execute(text(sql), {"refkey": refkey})
+def delete_reference(refkey, user_id):
+    sql = "DELETE FROM articles WHERE refkey=:refkey AND user_id=:user_id"
+    db.session.execute(text(sql), {"refkey": refkey, "user_id": user_id})
     db.session.commit()

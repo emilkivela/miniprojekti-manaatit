@@ -22,7 +22,7 @@ def create_book(key, title, author, year, publisher, user_id): # pylint: disable
                                    "publisher": publisher, "user_id": user_id})
     db.session.commit()
 
-def delete_reference(refkey):
-    sql = "DELETE FROM books WHERE refkey=:refkey"
-    db.session.execute(text(sql), {"refkey": refkey})
+def delete_reference(refkey, user_id):
+    sql = "DELETE FROM books WHERE refkey=:refkey AND user_id=:user_id"
+    db.session.execute(text(sql), {"refkey": refkey, "user_id": user_id})
     db.session.commit()
