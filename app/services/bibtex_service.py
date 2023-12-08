@@ -26,7 +26,8 @@ class BibtexService:
             f"@book{{{book[1]},\n"
             f"  title = \"{book[2]}\",\n"
             f"  author = \"{book[3]}\",\n"
-            f"  year = \"{book[4]}\"\n"
+            f"  year = \"{book[4]}\",\n"
+            f"  publisher = \"{book[5]}\"\n"
             f"}}\n\n"
             f''
         )
