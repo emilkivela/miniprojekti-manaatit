@@ -13,9 +13,9 @@ def key_in_books(refkey):
     exists = result.scalar()
     return exists
 
-def create_book(key, title, author, year):
-    sql = "INSERT INTO books (refkey, title, author, pubYear) VALUES (:key, :title, :author, :year)"
-    db.session.execute(text(sql), {"key": key, "title": title, "author": author, "year": year})
+def create_book(key, title, author, year, publisher):
+    sql = "INSERT INTO books (refkey, title, author, pubYear, publisher) VALUES (:key, :title, :author, :year, :publisher)"
+    db.session.execute(text(sql), {"key": key, "title": title, "author": author, "year": year, "publisher": publisher})
     db.session.commit()
 
 def delete_reference(refkey):

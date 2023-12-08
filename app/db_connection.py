@@ -24,6 +24,7 @@ class Books(db.Model):
     title = db.Column(db.String(200), nullable=True)
     author = db.Column(db.String(200), nullable=True)
     pubyear = db.Column(db.Integer, nullable=True)
+    publisher = db.Column(db.String(200), nullable=True)
 
 class Articles(db.Model):
     __tablename__= "articles"

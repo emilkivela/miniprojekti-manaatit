@@ -84,8 +84,9 @@ def create_book():
     title = request.form["title"]
     author = request.form["author"]
     year = request.form["year"]
+    publisher = request.form["publisher"]
 
-    if not key or not title or not author or not year:
+    if not key or not title or not author or not year or not publisher:
         return render_template("new.html", error="All fields must be filled")
 
     if not year.isdigit():
@@ -94,7 +95,7 @@ def create_book():
     if key_exists(key):
         return render_template("new.html", error="Key already exists")
 
-    book_functions.create_book(key, title, author, year)
+    book_functions.create_book(key, title, author, year, publisher)
     return redirect("/")
 
 @app.route("/create_article", methods=["POST"])
