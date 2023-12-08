@@ -131,6 +131,11 @@ Registration Should Fail With Message
     Registration Page Should Be Open
     Page Should Contain  ${message}
 
+Login Should Fail With Message
+    [Arguments]  ${message}
+    Login Page Should Be Open
+    Page Should Contain  ${message}
+
 Log In With Credentials
     [Arguments]  ${username}  ${password}
     Go To Login Page
@@ -140,3 +145,7 @@ Log In With Credentials
 
 Login Should Succeed
     Index Page Should Be Open
+
+Sign Out
+    Index Page Should Be Open
+    Click Link  Sign out
