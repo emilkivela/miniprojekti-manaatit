@@ -3,17 +3,26 @@
 process_exists () {
   if [[ $(ps --no-headers -p $1) ]]
   then
-    return 0
+    true
   else
-    return 1
+    false
+  fi
+}
+
+kill_if_running () {
+  if process_exists $1
+  then
+    kill $1
   fi
 }
 
 SERVER_ADDRESS=0.0.0.0:8000
+export SECRET_KEY=test
 
 # käynnistetään gunicorn-palvelin taustalle
 gunicorn --bind=$SERVER_ADDRESS --timeout 600 startup:app &
 gunicorn_pid=$!
+trap "kill_if_running $gunicorn_pid" EXIT HUP INT TERM
 
 # odotetaan, että palvelin on valmiina ottamaan vastaan pyyntöjä
 i=0
@@ -21,12 +30,13 @@ while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' $SERVER_ADDRESS/ping)" != "
 do
   sleep 1
   ((i++))
-  if [[ $i -gt 60 ]]
+  if ! process_exists $gunicorn_pid
   then
-    if process_exists $gunicorn_pid
-    then
-      kill $gunicorn_pid
-    fi
+    exit 1
+  fi
+  if [[ $i > 5 ]]
+  then
+    kill_if_running $gunicorn_pid
     exit 1
   fi
 done
@@ -37,9 +47,6 @@ robot --variable SERVER:$SERVER_ADDRESS tests
 status=$?
 
 # pysäytetään gunicorn-palvelin
-if process_exists $gunicorn_pid
-then
-  kill $gunicorn_pid
-fi
+kill_if_running $gunicorn_pid
 
 exit $status
