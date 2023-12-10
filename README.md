@@ -38,4 +38,4 @@
 - Fills out acceptance criteria
 - Tested manually and automatically
 
-Sovellus on testattavissa [Azuressa](https://manaatit.azurewebsites.net/)
+Sovellus on testattavissa [Azuressa](https://manaatit.azurewebsites.net/) 
