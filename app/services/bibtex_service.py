@@ -13,7 +13,7 @@ class BibtexService:
             bibtex_str += self._stringify_book(book)
 
         for article in self._articles:
-            bibtex_str += self._stringity_article(article)
+            bibtex_str += self._stringify_article(article)
 
         return bibtex_str
 
@@ -32,7 +32,7 @@ class BibtexService:
             f''
         )
 
-    def _stringity_article(self, article):
+    def _stringify_article(self, article):
         return (
             f"@article{{{article[1]},\n"
             f"  title = \"{article[2]}\",\n"
