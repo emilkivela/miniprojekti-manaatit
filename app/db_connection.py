@@ -13,7 +13,7 @@ dbuser = conn_str_params['user']
 dbpass = conn_str_params['password']
 dbhost = conn_str_params['host']
 dbname = conn_str_params['dbname']
-DATABASE_URI = f"postgresql+psycopg2://"
+DATABASE_URI = f"postgresql+psycopg2://{dbuser}:{dbpass}@{dbhost}/{dbname}"
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URI
 db = SQLAlchemy(app)
 
@@ -26,7 +26,6 @@ class Books(db.Model):
     pubyear = db.Column(db.Integer, nullable=True)
     publisher = db.Column(db.String(200), nullable=True)
 
-    #user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
     user_id = db.Column(db.Integer, nullable=True)
 
 class Articles(db.Model):
@@ -40,7 +39,6 @@ class Articles(db.Model):
     volume = db.Column(db.String(200), nullable=True)
     pages = db.Column(db.String(200), nullable=True)
 
-    #user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
     user_id = db.Column(db.Integer, nullable=True)
 
 class Users(db.Model):
