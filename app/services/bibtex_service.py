@@ -1,6 +1,5 @@
 
 class BibtexService:
-
     def __init__(self, books, articles):
         self._books = books
         self._articles = articles
@@ -29,7 +28,6 @@ class BibtexService:
             f"  year = \"{book[4]}\",\n"
             f"  publisher = \"{book[5]}\"\n"
             f"}}\n\n"
-            f''
         )
 
     def _stringity_article(self, article):

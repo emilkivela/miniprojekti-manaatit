@@ -21,7 +21,6 @@ def logout():
         del session["username"]
     return redirect("/login")
 
-
 def register(username, password):
     if len(username) < 3:
         return "Username is too short (min. 3 characters)"

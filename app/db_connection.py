@@ -13,7 +13,7 @@ dbuser = conn_str_params['user']
 dbpass = conn_str_params['password']
 dbhost = conn_str_params['host']
 dbname = conn_str_params['dbname']
-DATABASE_URI = f"postgresql+psycopg2://{dbuser}:{dbpass}@{dbhost}/{dbname}"
+DATABASE_URI = f"postgresql+psycopg2://"
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URI
 db = SQLAlchemy(app)
 
