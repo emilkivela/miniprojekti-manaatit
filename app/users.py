@@ -4,6 +4,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask import redirect, session
 from app.db_connection import db
 
+REGISTER_INPUT_MIN_LENGTH = 3
+
 def login(username, password):
     sql = "SELECT id, password FROM users WHERE username=:username"
     result = db.session.execute(text(sql), {"username":username})
@@ -22,10 +24,10 @@ def logout():
     return redirect("/login")
 
 def register(username, password):
-    if len(username) < 3:
+    if len(username) < REGISTER_INPUT_MIN_LENGTH:
         return "Username is too short (min. 3 characters)"
 
-    if len(password) < 3:
+    if len(password) < REGISTER_INPUT_MIN_LENGTH:
         return "Password is too short (min. 3 characters)"
 
     sql = "SELECT * FROM users WHERE username = :username"
