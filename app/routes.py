@@ -27,8 +27,8 @@ def login():
         return redirect("/")
     error = None
     if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
+        username = request.form.get("username")
+        password = request.form.get("password")
         logged_in_succesfully = users.login(username, password)
         if logged_in_succesfully:
             return redirect("/")
@@ -46,8 +46,8 @@ def register():
 
 @app.route("/send_registration", methods=["POST"])
 def send_registration():
-    username = request.form["username"]
-    password = request.form["password"]
+    username = request.form.get("username")
+    password = request.form.get("password")
     error = users.register(username, password)
     if error:
         return render_template("register.html", error = error)
@@ -82,11 +82,11 @@ def key_exists(key):
 @app.route("/create_book", methods=["POST"])
 @login_required
 def create_book():
-    key = request.form["key"]
-    title = request.form["title"]
-    author = request.form["author"]
-    year = request.form["year"]
-    publisher = request.form["publisher"]
+    key = request.form.get("key")
+    title = request.form.get("title")
+    author = request.form.get("author")
+    year = request.form.get("year")
+    publisher = request.form.get("publisher")
     user_id = session.get('user_id')
 
     if not key or not title or not author or not year or not publisher:
@@ -104,13 +104,13 @@ def create_book():
 @app.route("/create_article", methods=["POST"])
 @login_required
 def create_article():
-    key = request.form["key"]
-    title = request.form["title"]
-    author = request.form["author"]
-    journal = request.form["journal"]
-    year = request.form["year"]
-    volume = request.form["volume"]
-    pages = request.form["pages"]
+    key = request.form.get("key")
+    title = request.form.get("title")
+    author = request.form.get("author")
+    journal = request.form.get("journal")
+    year = request.form.get("year")
+    volume = request.form.get("volume")
+    pages = request.form.get("pages")
     user_id = session.get('user_id')
 
     if not key or not title or not author or not journal:
@@ -132,7 +132,7 @@ def create_article():
 @login_required
 def remove_reference():
     user_id = session.get('user_id')
-    refkey = request.form["refkey"]
+    refkey = request.form.get("refkey")
     if book_functions.key_in_books(refkey, user_id):
         book_functions.delete_reference(refkey, user_id)
         return redirect("/")
