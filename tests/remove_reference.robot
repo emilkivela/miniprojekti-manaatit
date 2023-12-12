@@ -32,9 +32,3 @@ Create Test References
     Adding Reference Should Succeed
     Add Reference  &{TEST_REF3}
     Adding Reference Should Succeed
-
-Remove Reference
-    [Arguments]  &{reference}
-    Go To Home Page
-    Input Text  refkey  ${reference}[key]
-    Click Button  Remove reference

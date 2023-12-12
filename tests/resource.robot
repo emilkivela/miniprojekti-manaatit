@@ -104,6 +104,12 @@ Adding Reference Should Fail With Message
     Wait Until Page Contains  Create reference
     Page Should Contain  ${message}
 
+Remove Reference
+    [Arguments]  &{reference}
+    Go To Home Page
+    Input Text  refkey  ${reference}[key]
+    Click Button  Remove reference
+
 Reference Should Exist
     [Arguments]  &{reference}
     Go To Home Page

@@ -34,14 +34,39 @@ See Other User's References
     Set Username  kalle
     Set Password  kalle123
     Submit Credentials
-    Add Reference  type=book  key=JILH  title=Fewih  author=Wrol  year=432  publisher=Seirhrw
+    Add Reference  &{Test Book}
     Sign Out
     Go To Login Page
     Set Username  jussi
     Set Password  jussi456
     Submit Credentials
     Wait Until Page Contains  Article-references
-    Page Should Not Contain  JILH
+    Page Should Not Contain  ${Test Book}[key]
+    Sign Out
+
+Remove A Reference That Has The Same Key As Another User's Reference
+    Set Username  kalle
+    Set Password  kalle123
+    Submit Credentials
+    Add Reference  &{Test Book}
+    Sign Out
+    Go To Login Page
+    Set Username  jussi
+    Set Password  jussi456
+    Submit Credentials
+    Add Reference  &{Test Book}
+    Remove Reference  &{Test Book}
+    Go To Home Page
+    Wait Until Page Contains  Article-references
+    Page Should Not Contain  ${Test Book}[key]
+    Sign Out
+    Go To Login Page
+    Set Username  kalle
+    Set Password  kalle123
+    Submit Credentials
+    Go To Home Page
+    Wait Until Page Contains  Article-references
+    Page Should Contain  ${Test Book}[key]
 
 *** Keywords ***
 Set Username
