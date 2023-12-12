@@ -30,6 +30,19 @@ Login With Nonexistent Username
     Submit Credentials
     Login Should Fail With Message  Wrong username or password
 
+See Other User's References
+    Set Username  kalle
+    Set Password  kalle123
+    Submit Credentials
+    Add Reference  type=book  key=JILH  title=Fewih  author=Wrol  year=432  publisher=Seirhrw
+    Sign Out
+    Go To Login Page
+    Set Username  jussi
+    Set Password  jussi456
+    Submit Credentials
+    Wait Until Page Contains  Article-references
+    Page Should Not Contain  JILH
+
 *** Keywords ***
 Set Username
     [Arguments]  ${username}
@@ -38,8 +51,10 @@ Set Username
 Set Password
     [Arguments]  ${password}
     Input Password  password  ${password}
+
 Create User And Go To Login Page
     Register With Credentials  kalle  kalle123
+    Register With Credentials  jussi  jussi456
     Go To Login Page
 
 Submit Credentials
