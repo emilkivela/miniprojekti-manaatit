@@ -2,7 +2,7 @@
 Resource  book_resource.robot
 Suite Setup  Run Keywords  Open And Configure Browser  AND  Register Test User And Login
 Suite Teardown  Close Browser And Clear Database
-Test Setup  Go To Book Adding Page And Clear Database
+Test Setup  Go To Book Adding Page
 
 *** Test Cases ***
 Add Book With Valid Info

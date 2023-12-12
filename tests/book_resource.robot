@@ -25,7 +25,3 @@ Go To Book Adding Page
     Go To Ref Adding Page
     Click Button  showbook
     Book Adding Page Should Be Open
-
-Go To Book Adding Page And Clear Database
-    Go To Book Adding Page
-    Clear Database

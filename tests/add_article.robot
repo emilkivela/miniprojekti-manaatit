@@ -2,7 +2,7 @@
 Resource  resource.robot
 Suite Setup  Run Keywords  Open And Configure Browser  AND  Register Test User And Login
 Suite Teardown  Close Browser And Clear Database
-Test Setup  Go To Article Adding Page And Clear Database
+Test Setup  Go To Article Adding Page
 
 *** Test Cases ***
 Add Article With Valid Info
@@ -148,7 +148,3 @@ Go To Article Adding Page
     Go To Ref Adding Page
     Click Button  showarticle
     Article Adding Page Should Be Open
-
-Go To Article Adding Page And Clear Database
-    Go To Article Adding Page
-    Clear Database
