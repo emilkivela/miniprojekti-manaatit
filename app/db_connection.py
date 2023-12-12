@@ -25,9 +25,8 @@ class Books(db.Model):
     author = db.Column(db.String(200), nullable=True)
     pubyear = db.Column(db.Integer, nullable=True)
     publisher = db.Column(db.String(200), nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
 
-    #user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
-    user_id = db.Column(db.Integer, nullable=True)
 
 class Articles(db.Model):
     __tablename__= "articles"
@@ -39,9 +38,7 @@ class Articles(db.Model):
     pubyear = db.Column(db.Integer, nullable=True)
     volume = db.Column(db.String(200), nullable=True)
     pages = db.Column(db.String(200), nullable=True)
-
-    #user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
-    user_id = db.Column(db.Integer, nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
 
 class Users(db.Model):
     __tablename__ = "users"
