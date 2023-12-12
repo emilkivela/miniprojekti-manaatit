@@ -12,10 +12,12 @@
     <div class="background"></div>  
     <div class="div-center"> 
       <div class="content">  
-        <form action="/new">
-          <input type="submit" value="Create a new reference">
-        </form>
-        <a href="{{url_for('download')}}"> Download file</a>
+        <p>
+          <a type="button" class="btn btn-primary" href="/new">Create a new reference</a>
+        </p>
+        <p>
+          <a type="button" class="btn btn-outline-primary" href="/download">Download file</a>
+        </p>
         <h3>Book-references</h3>
         <table border=1 class="table table-striped">
           <thead>
@@ -78,7 +80,7 @@
             {{ error }}
           {% endif %}
           <br>
-          <input type="submit" value="Remove reference">
+          <input type="submit" class="btn btn-primary" value="Remove reference">
         </form>
       </div> 
     </div>     
