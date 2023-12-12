@@ -1,0 +1,36 @@
+*** Settings ***
+Resource  resource.robot
+Suite Setup  Open And Configure Browser
+Suite Teardown  Run Keywords  Close Browser  AND  Clear Database
+Test Setup  Run Keywords  Clear Database  AND  Register User And Login
+
+*** Test Cases ***
+View Edit Page For A Reference
+    Add Reference  &{Test Book}
+    Go To Edit Page For  &{Test Book}
+    Edit Page Should Be Open
+    Page Should Contain All Fields Of  &{Test Book}
+
+View Edits On Listing Page
+    Add Reference  &{Test Book}
+    Go To Edit Page For  &{Test Book}
+    Input Text  refkey  FGEC
+    Click Button  Save
+    Index Page Should Be Open
+    Page Should Contain  FGEC
+    Page Should Not Contain  ${Test Book}[key]
+
+*** Keywords ***
+Go To Edit Page For
+    [Arguments]  &{reference}
+    Go To Home Page
+    Input Text  edit_refkey  ${reference}[key]
+    Click Button  Edit reference
+
+Page Should Contain All Fields Of
+    [Arguments]  &{reference}
+    FOR  ${field}  ${value}  IN  &{ref_type}
+        IF  $field != "type"
+            Page Should Contain  ${value}
+        END
+    END

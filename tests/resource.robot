@@ -11,6 +11,8 @@ ${ADDING_URL}  http://${SERVER}/new
 ${REGISTRATION_URL}  http://${SERVER}/register
 ${LOGIN_URL}  http://${SERVER}/login
 ${DOWNLOAD_DIR}  ${CURDIR}/test_downloads
+&{Test Book}  type=book  key=REFC  title=Iwedj Pfwei  author=Qierhsfe Sgfnjr
+...           year=1745  publisher=Wdslifhbb
 
 *** Keywords ***
 Open And Configure Browser
