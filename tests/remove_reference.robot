@@ -1,8 +1,7 @@
 *** Settings ***
 Resource  resource.robot
-Suite Setup  Run Keywords  Open And Configure Browser  AND  Register Test User And Login
+Suite Setup  Run Keywords  Open And Configure Browser  AND  Register Test User And Login  AND  Create Test References
 Suite Teardown  Run Keywords  Close Browser  AND  Clear Database
-Test Setup  Run Keywords  Clear Database  AND  Create Test References
 
 *** Variables ***
 &{TEST_REF1} =  type=book  key=ERDS  title=Sefrverij  author=Gewfj Oewjif  year=908  publisher=Oefhi
@@ -12,17 +11,18 @@ Test Setup  Run Keywords  Clear Database  AND  Create Test References
 ...             year=234  volume=18  pages=567--569
 
 *** Test Cases ***
+Try To Remove A Reference That Does Not Exist
+    Remove Reference  key=GRER
+    Reference Should Exist  &{TEST_REF1}
+    Reference Should Exist  &{TEST_REF2}
+    Reference Should Exist  &{TEST_REF3}
+
 Remove One Of Multiple References
     Remove Reference  &{TEST_REF2}
     Reference Should Exist  &{TEST_REF1}
     Reference Should Exist  &{TEST_REF3}
     Reference Should Not Exist  &{TEST_REF2}
 
-Try To Remove A Reference That Does Not Exist
-    Remove Reference  key=GRER
-    Reference Should Exist  &{TEST_REF1}
-    Reference Should Exist  &{TEST_REF2}
-    Reference Should Exist  &{TEST_REF3}
 
 *** Keywords ***
 Create Test References
