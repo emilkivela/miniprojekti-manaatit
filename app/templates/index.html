@@ -1,23 +1,21 @@
 <!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">      
-        <title>Main page</title>
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    </head>
-    <body>
-      {% include "menu.html" %}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">      
+    <title>Main page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  </head>
+  <body>
+    {% include "menu.html" %}
     <div class="background"></div>  
     <div class="div-center"> 
-      <div class="content">
-        
+      <div class="content">  
         <form action="/new">
-            <input type="submit" value="Create a new reference">
+          <input type="submit" value="Create a new reference">
         </form>
         <a href="{{url_for('download')}}"> Download file</a>
-        
         <h3>Book-references</h3>
         <table border=1 class="table table-striped">
           <thead>
@@ -72,21 +70,18 @@
             {% endfor %}
           </tbody>
         </table>
-        
         <h3>Remove reference</h3>
         <form action="/remove_reference" method="post">
-            Reference key:<br>
-            <input type="text" id="refkey" name="refkey"><br>
-            {% if error %}
-                {{ error }}
-            {% endif %}
-            <br>
-            <input type="submit" value="Remove reference">
+          Reference key:<br>
+          <input type="text" id="refkey" name="refkey"><br>
+          {% if error %}
+            {{ error }}
+          {% endif %}
+          <br>
+          <input type="submit" value="Remove reference">
         </form>
       </div> 
     </div>     
-    </body>
-  </div>
-
+  </body>
 </html>
     
