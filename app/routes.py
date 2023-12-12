@@ -88,6 +88,7 @@ def create_book():
     year = request.form["year"]
     publisher = request.form["publisher"]
     user_id = session.get('user_id')
+    tag_id = None
 
     if not key or not title or not author or not year or not publisher:
         return render_template("new.html", error="All fields must be filled")
@@ -98,7 +99,7 @@ def create_book():
     if key_exists(key):
         return render_template("new.html", error="Key already exists")
 
-    book_functions.create_book(key, title, author, year, publisher, user_id)
+    book_functions.create_book(key, title, author, year, publisher, user_id, tag_id)
     return redirect("/")
 
 @app.route("/create_article", methods=["POST"])
@@ -112,6 +113,7 @@ def create_article():
     volume = request.form["volume"]
     pages = request.form["pages"]
     user_id = session.get('user_id')
+    tag_id = None
 
     if not key or not title or not author or not journal:
         return render_template("new.html", error="All fields must be filled")
@@ -125,7 +127,18 @@ def create_article():
     if key_exists(key):
         return render_template("new.html", error="Key already exists")
 
-    article_functions.create_article(key, title, author, journal, year, volume, pages, user_id)
+    article_functions.create_article(
+        key,
+        title,
+        author,
+        journal,
+        year,
+        volume,
+        pages,
+        user_id,
+        tag_id
+        )
+
     return redirect("/")
 
 @app.route("/remove_reference", methods=["POST","GET"])

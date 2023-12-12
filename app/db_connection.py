@@ -26,6 +26,7 @@ class Books(db.Model):
     pubyear = db.Column(db.Integer, nullable=True)
     publisher = db.Column(db.String(200), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
+    tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), nullable=True)
 
 
 class Articles(db.Model):
@@ -39,12 +40,18 @@ class Articles(db.Model):
     volume = db.Column(db.String(200), nullable=True)
     pages = db.Column(db.String(200), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
+    tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), nullable=True)
 
 class Users(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(200), nullable=True)
     password = db.Column(db.String(200), nullable=True)
+
+class Tags(db.Model):
+    __tablename__ = "tags"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=True)
 
 
 with app.app_context():

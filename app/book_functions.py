@@ -15,11 +15,11 @@ def key_in_books(refkey, user_id):
     exists = result.scalar()
     return exists
 
-def create_book(key, title, author, year, publisher, user_id): # pylint: disable=too-many-arguments
-    sql = "INSERT INTO books (refkey, title, author, pubYear, publisher, user_id) "\
-          "VALUES (:key, :title, :author, :year, :publisher, :user_id)"
+def create_book(key, title, author, year, publisher, user_id, tag_id): # pylint: disable=too-many-arguments
+    sql = "INSERT INTO books (refkey, title, author, pubYear, publisher, user_id, tag_id) "\
+          "VALUES (:key, :title, :author, :year, :publisher, :user_id, :tag_id)"
     db.session.execute(text(sql), {"key": key, "title": title, "author": author, "year": year,\
-                                   "publisher": publisher, "user_id": user_id})
+                                   "publisher": publisher, "user_id": user_id, "tag_id": tag_id})
     db.session.commit()
 
 def delete_reference(refkey, user_id):
