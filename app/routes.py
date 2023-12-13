@@ -3,7 +3,7 @@ from functools import wraps
 from flask import redirect, render_template, request, send_file, session
 from app.services.bibtex_service import BibtexService
 from app.app import app
-from app import users, book_functions, article_functions
+from app import users, book_functions, article_functions, tag_functions
 
 def login_required(f):
     @wraps(f)
@@ -214,3 +214,37 @@ def edit_article(key):
         return redirect("/")
 
     return render_template("edit_article.html", key=key)
+
+@app.route("/create_tag", methods=["POST"])
+@login_required
+def create_tag():
+    name = request.form["name"]
+
+    if tag_functions.tag_exists():
+        return render_template("tag.html", error="Tag already exists") 
+        
+    tag_functions.create_tag(name)
+
+    return render_template("tag.html")
+
+@app.route('/add_tag_to_book', methods=['POST'])
+@login_required
+def add_tag_to_book():
+    book_key = request.form.get('book_key')
+
+    tag_name = request.form.get('tag_name')
+
+    tag_functions.add_tag_to_book(book_key, tag_name)
+
+    return render_template("index.html")
+
+@app.route('/add_tag_to_article', methods=['POST'])
+@login_required
+def add_tag_to_article():
+    article_key = request.form.get('book_key')
+
+    tag_name = request.form.get('tag_name')
+
+    tag_functions.add_tag_to_book(article_key, tag_name)
+
+    return render_template("index.html")
