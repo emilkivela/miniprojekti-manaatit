@@ -255,20 +255,26 @@ def create_tag():
 @login_required
 def add_tag_to_book():
     book_key = request.form.get('book_key')
-
     tag_name = request.form.get('tag_name')
+
+    if not book_key or not tag_name:
+        flash("All fields must be filled")
+        return render_template("tag.html")
 
     tag_functions.add_tag_to_book(book_key, tag_name)
 
-    return render_template("index.html")
+    return render_template("tag.html")
 
 @app.route('/add_tag_to_article', methods=['POST'])
 @login_required
 def add_tag_to_article():
     article_key = request.form.get('book_key')
-
     tag_name = request.form.get('tag_name')
 
+    if not article_key or not tag_name:
+        flash("All fields must be filled")
+        return render_template("tag.html")
+    
     tag_functions.add_tag_to_book(article_key, tag_name)
 
-    return render_template("index.html")
+    return render_template("tag.html")

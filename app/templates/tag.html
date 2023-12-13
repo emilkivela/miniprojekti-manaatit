@@ -6,10 +6,36 @@
 </head>
 
 <body>
+  <h2>Create tag</h2>
   <form action="/create_tag" method="post">
   <label for="tag">Tag:</label>
   <input type="text" id="tag" name="tag">
   </form>
+
+  <h2>Add tag to book</h2>
+
+  <form action="/add_tag_to_book" method="post">
+    <label for="book_key">Book Key:</label>
+    <input type="text" id="book_key" name="book_key">
+
+    <label for="tag_name">Tag Name:</label>
+    <input type="text" id="tag_name" name="tag_name">
+
+    <button type="submit">Add Tag</button>
+  </form>
+
+  <h2>Add tag to book</h2>
+
+  <form action="/add_tag_to_article" method="post">
+    <label for="article_key">Book Key:</label>
+    <input type="text" id="article_key" name="article_key">
+
+    <label for="tag_name">Tag Name:</label>
+    <input type="text" id="tag_name" name="tag_name">
+
+    <button type="submit">Add Tag</button>
+  </form>
+
   {% with messages = get_flashed_messages() %}
   {% if messages %}
     {% for message in messages %}
@@ -17,5 +43,6 @@
     {% endfor %}
   {% endif %}
   {% endwith %}
+
 </body>
 </html>
