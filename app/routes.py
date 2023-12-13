@@ -274,7 +274,7 @@ def add_tag_to_article():
     if not article_key or not tag_name:
         flash("All fields must be filled")
         return render_template("tag.html")
-    
+
     tag_functions.add_tag_to_book(article_key, tag_name)
 
     return render_template("tag.html")
