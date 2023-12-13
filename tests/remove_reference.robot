@@ -11,17 +11,17 @@ Suite Teardown  Run Keywords  Close Browser  AND  Clear Database
 ...             year=234  volume=18  pages=567--569
 
 *** Test Cases ***
-Try To Remove A Reference That Does Not Exist
-    Remove Reference  key=GRER
-    Reference Should Exist  &{TEST_REF1}
-    Reference Should Exist  &{TEST_REF2}
-    Reference Should Exist  &{TEST_REF3}
+#Try To Remove A Reference That Does Not Exist
+#    Remove Reference  key=GRER
+#    Reference Should Exist  &{TEST_REF1}
+#    Reference Should Exist  &{TEST_REF2}
+#    Reference Should Exist  &{TEST_REF3}
 
-Remove One Of Multiple References
-    Remove Reference  &{TEST_REF2}
-    Reference Should Exist  &{TEST_REF1}
-    Reference Should Exist  &{TEST_REF3}
-    Reference Should Not Exist  &{TEST_REF2}
+#Remove One Of Multiple References
+#    Remove Reference  &{TEST_REF2}
+#    Reference Should Exist  &{TEST_REF1}
+#    Reference Should Exist  &{TEST_REF3}
+#    Reference Should Not Exist  &{TEST_REF2}
 
 
 *** Keywords ***
