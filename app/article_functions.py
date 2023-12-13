@@ -30,7 +30,11 @@ def delete_reference(refkey, user_id):
     db.session.commit()
 
 def update_article(og_key, refkey, title, author, journal, year, volume, pages, user_id, tag_id): # pylint: disable=too-many-arguments
-    sql = "UPDATE articles SET refkey=:refkey, title=:title, author=:author, journal=:journal, pubYear=:pubyear, volume=:volume, pages=:pages, tag_id=:tag_id WHERE refkey=:og_key AND user_id=:user_id"
-    db.session.execute(text(sql), {"refkey": refkey, "title": title, "author": author, "journal":journal, "pubyear": year,\
-                                   "volume": volume, "pages":pages, "user_id": user_id, "tag_id": tag_id, "og_key":og_key})
+    sql = "UPDATE articles SET refkey=:refkey, title=:title, author=:author, journal=:journal,"\
+          "pubYear=:pubyear, volume=:volume, pages=:pages, tag_id=:tag_id"\
+          "WHERE refkey=:og_key AND user_id=:user_id"
+    db.session.execute(text(sql), {"refkey": refkey, "title": title, "author": author,\
+                                    "journal":journal,"pubyear": year,"volume": volume,\
+                                    "pages":pages,"user_id": user_id, "tag_id": tag_id,\
+                                    "og_key":og_key})
     db.session.commit()

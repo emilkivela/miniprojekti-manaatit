@@ -169,14 +169,14 @@ def edit_book(key):
             year = request.form["year"]
             publisher = request.form["publisher"]
             tag_id = None
-            
+
             if not refkey or not title or not author or not year or not publisher:
                 return render_template("edit_book.html", error="All fields must be filled")
 
             if not year.isdigit():
                 return render_template("edit_book.html", error="Year must be a number")
 
-            
+
             book_functions.update_book(key, refkey, title, author, year, publisher, user_id, tag_id)
             return redirect("/")
     else:
@@ -197,7 +197,7 @@ def edit_article(key):
             volume = request.form["volume"]
             pages = request.form["pages"]
             tag_id = None
-            
+
             if not refkey or not title or not author or not journal:
                 return render_template("edit_article.html", error="All fields must be filled")
 
@@ -206,9 +206,10 @@ def edit_article(key):
 
             if not year.isdigit():
                 return render_template("edit_article.html", error="Year must be a number")
-            
-            article_functions.update_article(key, refkey, title, author, journal, year, volume, pages, user_id, tag_id)
 
+            article_functions.update_article(key, refkey, title, author, journal,
+                                              year, volume, pages, user_id, tag_id
+                                            )
             return redirect("/")
     else:
         return redirect("/")
@@ -220,9 +221,9 @@ def edit_article(key):
 def create_tag():
     name = request.form["name"]
 
-    if tag_functions.tag_exists():
-        return render_template("tag.html", error="Tag already exists") 
-        
+    if tag_functions.tag_exists(name):
+        return render_template("tag.html", error="Tag already exists")
+
     tag_functions.create_tag(name)
 
     return render_template("tag.html")

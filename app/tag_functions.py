@@ -18,7 +18,7 @@ def tag_exists(tag_name):
 def create_tag(name):
     sql = "INSERT INTO tags (name) VALUES (:name)"
     db.session.execute(text(sql), {"name": name})
-    db.session.commit() 
+    db.session.commit()
 
 def add_tag_to_book(book_key, tag_name):
     tag = db.session.execute(
