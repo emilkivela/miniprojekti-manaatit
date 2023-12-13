@@ -26,3 +26,9 @@ def delete_reference(refkey, user_id):
     sql = "DELETE FROM books WHERE refkey=:refkey AND user_id=:user_id"
     db.session.execute(text(sql), {"refkey": refkey, "user_id": user_id})
     db.session.commit()
+
+def update_book(og_key, refkey, title, author, year, publisher, user_id, tag_id): # pylint: disable=too-many-arguments
+    sql = "UPDATE books SET refkey=:refkey, title=:title, author=:author, pubYear=:pubYear, publisher=:publisher, tag_id=:tag_id WHERE refkey=:og_key AND user_id=:user_id"
+    db.session.execute(text(sql), {"refkey": refkey, "title": title, "author": author, "pubYear": year,\
+                                   "publisher": publisher, "user_id": user_id, "tag_id": tag_id, "og_key":og_key})
+    db.session.commit()
