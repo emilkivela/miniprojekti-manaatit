@@ -1,10 +1,9 @@
 from sqlalchemy.sql import text
 from app.db_connection import db
 
-def get_tags(user_id):
-    tags = db.session.execute(
-        text("SELECT * FROM tags WHERE user_id=:user_id"),
-        {"user_id": user_id}).fetchall()
+def get_tags():
+    sql = "SELECT * FROM tags;"
+    tags = db.session.execute(text(sql)).fetchall()
     db.session.commit()
     return tags
 

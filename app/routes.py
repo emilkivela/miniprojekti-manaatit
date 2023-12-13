@@ -56,7 +56,8 @@ def send_registration():
 @app.route("/new")
 @login_required
 def new():
-    return render_template("new.html")
+    tags = tag_functions.get_tags()
+    return render_template("new.html", tags=tags)
 
 @app.route("/download")
 @login_required
@@ -88,7 +89,9 @@ def create_book():
     year = request.form["year"]
     publisher = request.form["publisher"]
     user_id = session.get('user_id')
-    tag_id = None
+    tag_id = request.form["tag"]
+    if request.form["tag"] == "0":
+        tag_id = None
 
     if not key or not title or not author or not year or not publisher:
         return render_template("new.html", error="All fields must be filled")
@@ -113,7 +116,9 @@ def create_article():
     volume = request.form["volume"]
     pages = request.form["pages"]
     user_id = session.get('user_id')
-    tag_id = None
+    tag_id = request.form["tag"]
+    if request.form["tag"] == "0":
+        tag_id = None
 
     if not key or not title or not author or not journal:
         return render_template("new.html", error="All fields must be filled")
@@ -215,6 +220,11 @@ def edit_article(key):
         return redirect("/")
 
     return render_template("edit_article.html", key=key)
+
+@app.route("/create_tags")
+@login_required
+def create_tags():
+    return render_template("tag.html")
 
 @app.route("/create_tag", methods=["POST"])
 @login_required

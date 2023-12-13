@@ -36,24 +36,33 @@
 					<div id="book">
 						<form action="/create_book" method="post">
 							<p>
-							<label for="key">Key:</label>
-							<input type="text" id="key" name="key">
+								<label for="key">Key:</label>
+								<input type="text" id="key" name="key">
 							</p>
 							<p>
-							<label for="title">Title:</label>
-							<input type="text" id="title" name="title">
+								<label for="title">Title:</label>
+								<input type="text" id="title" name="title">
 							</p>
 							<p>
-							<label for="author">Author:</label>
-							<input type="text" id="author" name="author">
+								<label for="author">Author:</label>
+								<input type="text" id="author" name="author">
 							</p>
 							<p>
-							<label for="year">Year:</label>
-							<input type="text" id="year" name="year">
+								<label for="year">Year:</label>
+								<input type="text" id="year" name="year">
 							</p>
 							<p>
-							<label for="publisher">Publisher:</label>
-							<input type="text" id="publisher" name="publisher">
+								<label for="publisher">Publisher:</label>
+								<input type="text" id="publisher" name="publisher">
+							</p>
+							<p>
+								<label for="tag">Tag:</label>
+								<select name="tag" id="tag">
+									<option selected value="0">Select a tag</option>
+									{% for tag in tags %}
+										<option value={{ tag[0] }}>{{ tag[1] }}</option>
+									{% endfor %}
+								</select>
 							</p>
 							<p>
 							<input type="submit" value="Create reference">
@@ -89,6 +98,15 @@
 							<p>
 								<label for="pages">Pages:</label>
 								<input type="text" id="pages" name="pages">
+							</p>
+							<p>
+								<label for="tag">Tag:</label>
+								<select name="tag" id="tag">
+									<option selected value="0">Select a tag</option>
+									{% for tag in tags %}
+										<option value={{ tag[0] }}>{{ tag[1] }}</option>
+									{% endfor %}
+								</select>
 							</p>
 							<p>
 							<input type="submit" value="Create reference">
