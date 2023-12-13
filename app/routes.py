@@ -243,6 +243,9 @@ def create_tags():
 def create_tag():
     name = request.form["name"]
 
+    if not name:
+        flash("All fields must be filled")
+        return render_template("tag.html")
     if tag_functions.tag_exists(name):
         flash("Tag already exists")
         return render_template("tag.html")
@@ -254,11 +257,20 @@ def create_tag():
 @app.route('/add_tag_to_book', methods=['POST'])
 @login_required
 def add_tag_to_book():
+    user_id = session.get("user_id")
     book_key = request.form.get('book_key')
     tag_name = request.form.get('tag_name')
 
     if not book_key or not tag_name:
         flash("All fields must be filled")
+        return render_template("tag.html")
+
+    if not book_functions.key_in_books(book_key, user_id):
+        flash("Not a valid key")
+        return render_template("tag.html")
+
+    if not tag_functions.tag_exists(tag_name):
+        flash("Not a valid tag")
         return render_template("tag.html")
 
     tag_functions.add_tag_to_book(book_key, tag_name)
@@ -273,6 +285,14 @@ def add_tag_to_article():
 
     if not article_key or not tag_name:
         flash("All fields must be filled")
+        return render_template("tag.html")
+
+    if not article_functions.key_in_articles(article_key, session.get('user_id')):
+        flash("Not a valid key")
+        return render_template("tag.html")
+
+    if not tag_functions.tag_exists(tag_name):
+        flash("Not a valid tag")
         return render_template("tag.html")
 
     tag_functions.add_tag_to_article(article_key, tag_name)
