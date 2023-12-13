@@ -113,9 +113,13 @@
 							</p>
 						</form>
 					</div>
-					{% if error %}
-						<p> {{ error }}</p>
+					{% with messages = get_flashed_messages() %}
+					{% if messages %}
+					  {% for message in messages %}
+						<p>{{ message }}</p>
+					  {% endfor %}
 					{% endif %}
+					{% endwith %}
 					<br>
 					<a href="/">Return to main page</a>
 				</div>

@@ -2,13 +2,20 @@
 
 <html>
 <head>
-    <title>Add tag</title>     
+  <title>Add tag</title>     
 </head>
 
 <body>
-    <form action="/create_tag" method="post">
-    <label for="tag">Tag:</label>
-	<input type="text" id="tag" name="tag">
-    </form>
+  <form action="/create_tag" method="post">
+  <label for="tag">Tag:</label>
+  <input type="text" id="tag" name="tag">
+  </form>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <p>{{ message }}</p>
+    {% endfor %}
+  {% endif %}
+  {% endwith %}
 </body>
 </html>

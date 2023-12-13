@@ -14,8 +14,8 @@
           <h3>Create account</h3>
           <hr />
           {% if error %}
-            {{ error }}
-          {% endif %}
+					  <p>{{ error }}</p>
+					{% endif %}
           <form action="/send_registration" method="POST">
             <div class="form-group">
               <label for="username">Username</label>

@@ -1,6 +1,6 @@
 from io import BytesIO
 from functools import wraps
-from flask import redirect, render_template, request, send_file, session
+from flask import redirect, render_template, request, send_file, session, flash
 from app.services.bibtex_service import BibtexService
 from app.app import app
 from app import users, book_functions, article_functions, tag_functions
@@ -25,15 +25,15 @@ def index():
 def login():
     if "username" in session:
         return redirect("/")
-    error = None
+
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
         logged_in_succesfully = users.login(username, password)
         if logged_in_succesfully:
             return redirect("/")
-        error = "Wrong username or password"
-    return render_template("login.html", error=error)
+        flash("Wrong username or password")
+    return render_template("login.html")
 
 @app.route("/logout")
 def logout():
@@ -94,13 +94,16 @@ def create_book():
         tag_id = None
 
     if not key or not title or not author or not year or not publisher:
-        return render_template("new.html", error="All fields must be filled")
+        flash("All fields must be filled")
+        return render_template("new.html")
 
     if not year.isdigit():
-        return render_template("new.html", error="Year must be a number")
+        flash("Year must be a number")
+        return render_template("new.html")
 
     if key_exists(key):
-        return render_template("new.html", error="Key already exists")
+        flash("Key already exists")
+        return render_template("new.html")
 
     book_functions.create_book(key, title, author, year, publisher, user_id, tag_id)
     return redirect("/")
@@ -121,16 +124,20 @@ def create_article():
         tag_id = None
 
     if not key or not title or not author or not journal:
-        return render_template("new.html", error="All fields must be filled")
+        flash("All fields must be filled")
+        return render_template("new.html")
 
     if not year or not volume or not pages:
-        return render_template("new.html", error="All fields must be filled")
+        flash("All fields must be filled")
+        return render_template("new.html")
 
     if not year.isdigit():
-        return render_template("new.html", error="Year must be a number")
+        flash("Year must be a number")
+        return render_template("new.html")
 
     if key_exists(key):
-        return render_template("new.html", error="Key already exists")
+        flash("Key already exists")
+        return render_template("new.html")
 
     article_functions.create_article(
         key,
@@ -157,10 +164,10 @@ def remove_reference():
     if article_functions.key_in_articles(refkey, user_id):
         article_functions.delete_reference(refkey, user_id)
         return redirect("/")
-    error = "Key does not exist"
+    flash("Key does not exist")
     books = book_functions.get_books(session.get('user_id'))
     articles = article_functions.get_articles(session.get('user_id'))
-    return render_template("index.html", books=books, articles=articles, error= error)
+    return render_template("index.html", books=books, articles=articles)
 
 @app.route("/edit_book/<key>", methods=["POST", "GET"])
 @login_required
@@ -176,10 +183,12 @@ def edit_book(key):
             tag_id = None
 
             if not refkey or not title or not author or not year or not publisher:
-                return render_template("edit_book.html", error="All fields must be filled")
+                flash("All fields must be filled")
+                return render_template("edit_book.html")
 
             if not year.isdigit():
-                return render_template("edit_book.html", error="Year must be a number")
+                flash("Year must be a number")
+                return render_template("edit_book.html")
 
 
             book_functions.update_book(key, refkey, title, author, year, publisher, user_id, tag_id)
@@ -204,13 +213,16 @@ def edit_article(key):
             tag_id = None
 
             if not refkey or not title or not author or not journal:
-                return render_template("edit_article.html", error="All fields must be filled")
+                flash("All fields must be filled")
+                return render_template("edit_article.html")
 
             if not year or not volume or not pages:
-                return render_template("edit_article.html", error="All fields must be filled")
+                flash("All fields must be filled")
+                return render_template("edit_article.html")
 
             if not year.isdigit():
-                return render_template("edit_article.html", error="Year must be a number")
+                flash("Year must be a number")
+                return render_template("edit_article.html")
 
             article_functions.update_article(key, refkey, title, author, journal,
                                               year, volume, pages, user_id, tag_id
@@ -232,7 +244,8 @@ def create_tag():
     name = request.form["name"]
 
     if tag_functions.tag_exists(name):
-        return render_template("tag.html", error="Tag already exists")
+        flash("Tag already exists")
+        return render_template("tag.html")
 
     tag_functions.create_tag(name)
 
