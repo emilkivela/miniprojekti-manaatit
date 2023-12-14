@@ -171,7 +171,7 @@ def remove_reference():
 
 @app.route("/edit_book/<id>", methods=["POST","GET"])
 @login_required
-def edit_book():
+def edit_book(id): #pylint: disable=W0622
     book_id = id
     book = book_functions.get_book(book_id)
     tag_id = book_functions.get_tag_id(book_id)
@@ -206,41 +206,49 @@ def update_book():
     book_functions.update_book(book_id, refkey, title, author, year, publisher, tag_id)
     return redirect("/")
 
-@app.route("/edit_article/<key>", methods=["POST", "GET"])
+@app.route("/edit_article/<id>", methods=["POST","GET"])
 @login_required
-def edit_article(key):
-    user_id = session.get("user_id")
-    if article_functions.key_in_articles(key, user_id):
-        if request.method == "POST":
-            refkey = request.form["refkey"]
-            title = request.form["title"]
-            author = request.form["author"]
-            journal = request.form["journal"]
-            year = request.form["year"]
-            volume = request.form["volume"]
-            pages = request.form["pages"]
-            tag_id = None
+def edit_article(id): #pylint: disable=W0622
+    article_id = id
+    article = article_functions.get_article(article_id)
+    tag_id = book_functions.get_tag_id(article_id)
+    tag = None
+    if tag_id is not None:
+        tag = tag_functions.get_tag(tag_id)
+    tags = tag_functions.get_tags()
+    return render_template("edit_article.html", article=article, tags=tags, tag=tag)
 
-            if not refkey or not title or not author or not journal:
-                flash("All fields must be filled")
-                return render_template("edit_article.html")
 
-            if not year or not volume or not pages:
-                flash("All fields must be filled")
-                return render_template("edit_article.html")
+@app.route("/update_article", methods=["POST", "GET"])
+@login_required
+def update_article(key):
+    refkey = request.form["refkey"]
+    title = request.form["title"]
+    author = request.form["author"]
+    journal = request.form["journal"]
+    year = request.form["year"]
+    volume = request.form["volume"]
+    pages = request.form["pages"]
+    tag_id = request.form["tag"]
+    if request.form["tag"] == "0":
+        tag_id = None
 
-            if not year.isdigit():
-                flash("Year must be a number")
-                return render_template("edit_article.html")
+    if not refkey or not title or not author or not journal:
+        flash("All fields must be filled")
+        return render_template("edit_article.html")
 
-            article_functions.update_article(key, refkey, title, author, journal,
-                                              year, volume, pages, user_id, tag_id
-                                            )
-            return redirect("/")
-    else:
-        return redirect("/")
+    if not year or not volume or not pages:
+        flash("All fields must be filled")
+        return render_template("edit_article.html")
 
-    return render_template("edit_article.html", key=key)
+    if not year.isdigit():
+        flash("Year must be a number")
+        return render_template("edit_article.html")
+
+    article_functions.update_article(key, refkey, title, author, journal, #pylint: disable=E1121
+                                        year, volume, pages, tag_id)
+    return redirect("/")
+
 
 @app.route("/create_tags")
 @login_required

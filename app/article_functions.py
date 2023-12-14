@@ -8,6 +8,12 @@ def get_articles(user_id):
     db.session.commit()
     return articles
 
+def get_article(article_id):
+    sql = "SELECT * FROM articles WHERE id=:article_id"
+    article = db.session.execute(
+        text(sql), {"article_id": article_id}).fetchone()
+    return article
+
 def key_in_articles(refkey, user_id):
     result = db.session.execute(
         text("SELECT EXISTS(SELECT 1 FROM articles WHERE refkey=:refkey AND user_id=:user_id)"),
@@ -29,12 +35,11 @@ def delete_reference(refkey, user_id):
     db.session.execute(text(sql), {"refkey": refkey, "user_id": user_id})
     db.session.commit()
 
-def update_article(og_key, refkey, title, author, journal, year, volume, pages, user_id, tag_id): # pylint: disable=too-many-arguments
+def update_article(refkey, title, author, journal, year, volume, pages, tag_id): # pylint: disable=too-many-arguments
     sql = "UPDATE articles SET refkey=:refkey, title=:title, author=:author, journal=:journal,"\
           "pubYear=:pubyear, volume=:volume, pages=:pages, tag_id=:tag_id"\
           "WHERE refkey=:og_key AND user_id=:user_id"
     db.session.execute(text(sql), {"refkey": refkey, "title": title, "author": author,\
                                     "journal":journal,"pubyear": year,"volume": volume,\
-                                    "pages":pages,"user_id": user_id, "tag_id": tag_id,\
-                                    "og_key":og_key})
+                                    "pages":pages, "tag_id": tag_id})
     db.session.commit()
