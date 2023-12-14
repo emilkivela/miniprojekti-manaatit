@@ -1,130 +1,115 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1"> 
-		<title>Create reference</title>       
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<link rel="stylesheet" href="static/registerstyle.css">
-		<script>
-			var x = 0;
-			function reftype(x){
-				if (x==1) {
-				document.getElementById("book").style.display="block";
-				document.getElementById("article").style.display="none";
-				}
-				if (x==2) {
-				document.getElementById("book").style.display="none";
-				document.getElementById("article").style.display="block";
-				}
+	<script>
+		var x = 0;
+		function reftype(x){
+			if (x==1) {
+			document.getElementById("book").style.display="block";
+			document.getElementById("article").style.display="none";
 			}
-			function all_hidden() {
-				document.getElementById("book").style.display="none";
-				document.getElementById("article").style.display="none";
+			if (x==2) {
+			document.getElementById("book").style.display="none";
+			document.getElementById("article").style.display="block";
 			}
-		</script>
-	</head>
+		}
+		function all_hidden() {
+			document.getElementById("book").style.display="none";
+			document.getElementById("article").style.display="none";
+		}
+	</script>
+
 	<body onload="all_hidden()">
-		<div class="background">
-			<div class="div-center">
-				<div class="content">
-					<h2>Create reference</h2>
-					<input type="radio" name="reftype" onclick="reftype(1)" value="showbook"> Book
-					<input type="radio" name="reftype" onclick="reftype(2)" value="showarticle"> Article
-					<br>
-					<div id="book">
-						<form action="/create_book" method="post">
-							<p>
-								<label for="key">Key:</label>
-								<input type="text" id="key" name="key">
-							</p>
-							<p>
-								<label for="title">Title:</label>
-								<input type="text" id="title" name="title">
-							</p>
-							<p>
-								<label for="author">Author:</label>
-								<input type="text" id="author" name="author">
-							</p>
-							<p>
-								<label for="year">Year:</label>
-								<input type="text" id="year" name="year">
-							</p>
-							<p>
-								<label for="publisher">Publisher:</label>
-								<input type="text" id="publisher" name="publisher">
-							</p>
-							<p>
-								<label for="tag">Tag:</label>
-								<select name="tag" id="tag">
-									<option selected value="0">Select a tag</option>
-									{% for tag in tags %}
-										<option value={{ tag[0] }}>{{ tag[1] }}</option>
-									{% endfor %}
-								</select>
-							</p>
-							<p>
-							<input type="submit" value="Create reference">
-							</p>
-						</form>
-					</div>
-					<div id="article">
-						<form action="/create_article" method="post">
-							<p>
-								<label for="key">Key:</label>
-								<input type="text" id="key" name="key">
-							</p>
-							<p>
-								<label for="title">Title:</label>
-								<input type="text" id="title" name="title">
-							</p>
-							<p>
-								<label for="author">Author:</label>
-								<input type="text" id="author" name="author">
-							</p>
-							<p>
-								<label for="journal">Journal:</label>
-								<input type="text" id="journal" name="journal">
-							</p>
-							<p>
-								<label for="year">Year:</label>
-								<input type="text" id="year" name="year">
-							</p>
-							<p>
-								<label for="volume">Volume:</label>
-								<input type="text" id="volume" name="volume">
-							</p>
-							<p>
-								<label for="pages">Pages:</label>
-								<input type="text" id="pages" name="pages">
-							</p>
-							<p>
-								<label for="tag">Tag:</label>
-								<select name="tag" id="tag">
-									<option selected value="0">Select a tag</option>
-									{% for tag in tags %}
-										<option value={{ tag[0] }}>{{ tag[1] }}</option>
-									{% endfor %}
-								</select>
-							</p>
-							<p>
-							<input type="submit" value="Create reference">
-							</p>
-						</form>
-					</div>
-					{% with messages = get_flashed_messages() %}
-					{% if messages %}
-					  {% for message in messages %}
-						<p>{{ message }}</p>
-					  {% endfor %}
-					{% endif %}
-					{% endwith %}
-					<br>
-					<a href="/">Return to main page</a>
-				</div>
-			</div>
-		</div> 
+		<input type="radio" name="reftype" onclick="reftype(1)" value="showbook"> Book
+		<input type="radio" name="reftype" onclick="reftype(2)" value="showarticle"> Article
+		<br>
+		<div id="book">
+			<form action="/create_book" method="post">
+				<p>
+					<label for="key">Key:</label>
+					<input type="text" id="key" name="key">
+				</p>
+				<p>
+					<label for="title">Title:</label>
+					<input type="text" id="title" name="title">
+				</p>
+				<p>
+					<label for="author">Author:</label>
+					<input type="text" id="author" name="author">
+				</p>
+				<p>
+					<label for="year">Year:</label>
+					<input type="text" id="year" name="year">
+				</p>
+				<p>
+					<label for="publisher">Publisher:</label>
+					<input type="text" id="publisher" name="publisher">
+				</p>
+				<p>
+					<label for="tag">Tag:</label>
+					<select name="tag" id="tag">
+						<option selected value="0">Select a tag</option>
+						{% for tag in tags %}
+							<option value={{ tag[0] }}>{{ tag[1] }}</option>
+						{% endfor %}
+					</select>
+				</p>
+				<p>
+					<input type="submit" value="Create reference">
+				</p>
+			</form>
+		</div>
+		<div id="article">
+			<form action="/create_article" method="post">
+				<p>
+					<label for="key">Key:</label>
+					<input type="text" id="key" name="key">
+				</p>
+				<p>
+					<label for="title">Title:</label>
+					<input type="text" id="title" name="title">
+				</p>
+				<p>
+					<label for="author">Author:</label>
+					<input type="text" id="author" name="author">
+				</p>
+				<p>
+					<label for="journal">Journal:</label>
+					<input type="text" id="journal" name="journal">
+				</p>
+				<p>
+					<label for="year">Year:</label>
+					<input type="text" id="year" name="year">
+				</p>
+				<p>
+					<label for="volume">Volume:</label>
+					<input type="text" id="volume" name="volume">
+				</p>
+				<p>
+					<label for="pages">Pages:</label>
+					<input type="text" id="pages" name="pages">
+				</p>
+				<p>
+					<label for="tag">Tag:</label>
+					<select name="tag" id="tag">
+						<option selected value="0">Select a tag</option>
+						{% for tag in tags %}
+							<option value={{ tag[0] }}>{{ tag[1] }}</option>
+						{% endfor %}
+					</select>
+				</p>
+				<p>
+				<input type="submit" value="Create reference">
+				</p>
+			</form>
+		</div>
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+		{% for message in messages %}
+			<p>{{ message }}</p>
+		{% endfor %}
+		{% endif %}
+		{% endwith %}
+		<br>
 	<body>
 <html>
 
