@@ -185,7 +185,7 @@ def edit_book(id): #pylint: disable=W0622
 @app.route("/update_book", methods=["POST", "GET"])
 @login_required
 def update_book():
-    refkey = request.form["refkey"]
+    refkey = request.form["key"]
     title = request.form["title"]
     author = request.form["author"]
     year = request.form["year"]
@@ -221,14 +221,15 @@ def edit_article(id): #pylint: disable=W0622
 
 @app.route("/update_article", methods=["POST", "GET"])
 @login_required
-def update_article(key):
-    refkey = request.form["refkey"]
+def update_article():
+    refkey = request.form["key"]
     title = request.form["title"]
     author = request.form["author"]
     journal = request.form["journal"]
     year = request.form["year"]
     volume = request.form["volume"]
     pages = request.form["pages"]
+    article_id = request.form["article_id"]
     tag_id = request.form["tag"]
     if request.form["tag"] == "0":
         tag_id = None
@@ -245,7 +246,7 @@ def update_article(key):
         flash("Year must be a number")
         return render_template("edit_article.html")
 
-    article_functions.update_article(key, refkey, title, author, journal, #pylint: disable=E1121
+    article_functions.update_article(article_id, refkey, title, author, journal, #pylint: disable=E1121
                                         year, volume, pages, tag_id)
     return redirect("/")
 
