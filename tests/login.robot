@@ -40,7 +40,7 @@ See Other User's References
     Set Username  jussi
     Set Password  jussi456
     Submit Credentials
-    Wait Until Page Contains  Article-references
+    Wait Until Page Contains  Article references
     Page Should Not Contain  ${Test Book}[key]
     Sign Out
 
