@@ -30,7 +30,7 @@ def add_tag_to_book(book_key, tag_name):
         text("SELECT id FROM tags WHERE name=:tag_name"),
         {"tag_name": tag_name}).fetchone()
 
-    sql = "UPDATE books SET tag_id=:tag_id WHERE key=:book_key"
+    sql = "UPDATE books SET tag_id=:tag_id WHERE refkey=:book_key"
     db.session.execute(text(sql), {"tag_id": tag.id, "book_key": book_key})
     db.session.commit()
 
@@ -39,6 +39,6 @@ def add_tag_to_article(article_key, tag_name):
         text("SELECT id FROM tags WHERE name=:tag_name"),
         {"tag_name": tag_name}).fetchone()
 
-    sql = "UPDATE articles SET tag_id=:tag_id WHERE key=:article_key"
+    sql = "UPDATE articles SET tag_id=:tag_id WHERE refkey=:article_key"
     db.session.execute(text(sql), {"tag_id": tag.id, "article_key": article_key})
     db.session.commit()
