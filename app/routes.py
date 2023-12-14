@@ -175,11 +175,11 @@ def edit_book(id): #pylint: disable=W0622
     book_id = id
     book = book_functions.get_book(book_id)
     tag_id = book_functions.get_tag_id(book_id)
-    tag = None
+    selected_tag = None
     if tag_id is not None:
-        tag = tag_functions.get_tag(tag_id)
+        selected_tag = tag_functions.get_tag(tag_id)
     tags = tag_functions.get_tags()
-    return render_template("edit_book.html", book=book, tags=tags, tag=tag)
+    return render_template("edit_book.html", book=book, tags=tags, selected_tag=selected_tag)
 
 
 @app.route("/update_book", methods=["POST", "GET"])
@@ -211,12 +211,13 @@ def update_book():
 def edit_article(id): #pylint: disable=W0622
     article_id = id
     article = article_functions.get_article(article_id)
-    tag_id = book_functions.get_tag_id(article_id)
-    tag = None
+    tag_id = article_functions.get_tag_id(article_id)
+    selected_tag = None
     if tag_id is not None:
-        tag = tag_functions.get_tag(tag_id)
+        selected_tag = tag_functions.get_tag(tag_id)
     tags = tag_functions.get_tags()
-    return render_template("edit_article.html", article=article, tags=tags, tag=tag)
+    return render_template("edit_article.html", article=article, tags=tags,\
+                           selected_tag=selected_tag)
 
 
 @app.route("/update_article", methods=["POST", "GET"])

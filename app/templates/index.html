@@ -19,6 +19,7 @@
     <div class="div-center"> 
       <div class="content">  
         <a type="button" class="btn btn-primary" href="/new">Create a new reference</a>
+        <a type="button" class="btn btn-primary" href="/create_tags">Create a new tag</a>
         <a type="button" class="btn btn-outline-primary" href="/download">Download file</a><br>
         <h3 style="margin-top: 70px; margin-left: 5px">Book references</h3>
         <table border=1 class="table table-striped" data-toggle="table" data-search="true" data-show-columns="true">
@@ -29,6 +30,7 @@
               <th scope="col" data-sortable="true">Author:</th>
               <th scope="col" data-sortable="true">Year:</th>
               <th scope="col" data-sortable="true">Publisher:</th>
+              <th scope="col" data-sortable="true">Tag:</th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -41,6 +43,7 @@
               <td>{{ book[3] }}</td>
               <td>{{ book[4] }}</td>
               <td>{{ book[5] }}</td>
+              <td>{{ book[7] }}</td>
               <td>
                 <form action="/remove_reference" style="display: inline" method="post">
                   <input type="hidden" id="refkey" name="refkey" value="{{ book[1] }}">
@@ -64,6 +67,7 @@
               <th scope="col" data-sortable="true">Year:</th>
               <th scope="col" data-sortable="true">Volume:</th>
               <th scope="col" data-sortable="true">Pages:</th>
+              <th scope="col" data-sortable="true">Tag:</th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -78,6 +82,7 @@
                 <td>{{ article[5] }}</td>
                 <td>{{ article[6] }}</td>
                 <td>{{ article[7] }}</td>
+                <td>{{ article[9] }}</td>
                 <td>
                   <form action="/remove_reference" style="display: inline" method="post">
                     <input type="hidden" id="refkey" name="refkey" value="{{ article[1] }}">

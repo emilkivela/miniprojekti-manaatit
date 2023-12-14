@@ -1,11 +1,17 @@
 from sqlalchemy.sql import text
 from app.db_connection import db
-
+from app import tag_functions
 
 def get_articles(user_id):
     articles = db.session.execute(
         text("SELECT * FROM articles WHERE user_id=:user_id"), {"user_id": user_id}).fetchall()
     db.session.commit()
+    for i in range(0, len(articles)):  # pylint: disable=consider-using-enumerate
+        articles[i] = list(articles[i])
+        if articles[i][9] is None:
+            articles[i][9] = "–"
+        else:
+            articles[i][9] = tag_functions.get_tag(articles[i][9])[1]
     return articles
 
 def get_article(article_id):
@@ -43,3 +49,12 @@ def update_article(article_id, refkey, title, author, journal, year, volume, pag
                                    "author": author, "journal":journal,"pubyear": year,\
                                    "volume": volume, "pages":pages, "tag_id": tag_id})
     db.session.commit()
+
+def get_tag_id(article_id):
+    sql = "SELECT tag_id FROM articles WHERE id=:article_id"
+    tag_id = db.session.execute(
+        text(sql), {"article_id": article_id}).fetchall()
+    db.session.commit()
+    if len(tag_id) > 0:
+        return tag_id[0][0]
+    return None

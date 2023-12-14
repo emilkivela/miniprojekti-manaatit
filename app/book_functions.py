@@ -1,11 +1,18 @@
 from sqlalchemy.sql import text
 from app.db_connection import db
+from app import tag_functions
 
 
 def get_books(user_id):
     books = db.session.execute(
         text("SELECT * FROM books WHERE user_id=:user_id"), {"user_id": user_id}).fetchall()
     db.session.commit()
+    for i in range(0, len(books)):  # pylint: disable=consider-using-enumerate
+        books[i] = list(books[i])
+        if books[i][7] is None:
+            books[i][7] = "–"
+        else:
+            books[i][7] = tag_functions.get_tag(books[i][7])[1]
     return books
 
 def get_book(book_id):

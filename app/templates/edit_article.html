@@ -47,11 +47,12 @@
 								<label for="tag">Tag:</label>
 								<select name="tag" id="tag">
 									<option value="0">Select a tag</option>
-									{% if tag %}
-									<option selected value="{{ tag }}">{{ tag[0] }}</option>
-									{% endif %}
 									{% for tag in tags %}
-										<option value="{{ tag[0] }}">{{ tag[1] }}</option>
+										<option
+                                         {% if selected_tag[0] == tag[0] %}
+                                           selected
+                                         {% endif %}
+                                         value="{{ tag[0] }}">{{ tag[1] }}</option>
 									{% endfor %}
 								</select>
 							</p>

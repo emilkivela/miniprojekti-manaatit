@@ -8,10 +8,12 @@ def get_tags():
     return tags
 
 def get_tag(tag_id):
+    if tag_id is None:
+        return (0, "")
     sql = "SELECT name FROM tags WHERE id=:tag_id"
     tag = db.session.execute(text(sql), {"tag_id": tag_id}).fetchall()[0]
     db.session.commit()
-    return tag
+    return (tag_id, tag[0])
 
 def tag_exists(tag_name):
     result = db.session.execute(
