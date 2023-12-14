@@ -1,7 +1,8 @@
 *** Settings ***
 Resource  resource.robot
-Suite Setup  Run Keywords  Open And Configure Browser  AND  Register Test User And Login  AND  Create Test References
+Suite Setup  Open And Configure Browser
 Suite Teardown  Run Keywords  Close Browser  AND  Clear Database
+Test Setup  Run Keywords  Clear Database  AND  Register Test Users  AND  Create Test References
 
 *** Variables ***
 &{TEST_REF1} =  type=book  key=ERDS  title=Sefrverij  author=Gewfj Oewjif  year=908  publisher=Oefhi
@@ -11,24 +12,42 @@ Suite Teardown  Run Keywords  Close Browser  AND  Clear Database
 ...             year=234  volume=18  pages=567--569
 
 *** Test Cases ***
-#Try To Remove A Reference That Does Not Exist
-#    Remove Reference  key=GRER
-#    Reference Should Exist  &{TEST_REF1}
-#    Reference Should Exist  &{TEST_REF2}
-#    Reference Should Exist  &{TEST_REF3}
+Remove One Of Multiple References
+    Log In With Credentials  kalle  kalle123
+    Remove Reference  &{TEST_REF2}
+    Reference Should Exist  &{TEST_REF1}
+    Reference Should Exist  &{TEST_REF3}
+    Reference Should Not Exist  &{TEST_REF2}
+    Sign Out
 
-#Remove One Of Multiple References
-#    Remove Reference  &{TEST_REF2}
-#    Reference Should Exist  &{TEST_REF1}
-#    Reference Should Exist  &{TEST_REF3}
-#    Reference Should Not Exist  &{TEST_REF2}
-
+Remove A Reference That Has The Same Key As Another User's Reference
+    Log In With Credentials  kalle  kalle123
+    Add Reference  &{Test Book}
+    Sign Out
+    Log In With Credentials  jussi  jussi456
+    Add Reference  &{Test Book}
+    Remove Reference  &{Test Book}
+    Go To Home Page
+    Wait Until Page Contains  Article references
+    Page Should Not Contain  ${Test Book}[key]
+    Sign Out
+    Log In With Credentials  kalle  kalle123
+    Go To Home Page
+    Wait Until Page Contains  Article references
+    Page Should Contain  ${Test Book}[key]
+    Sign Out
 
 *** Keywords ***
+Register Test Users
+    Register With Credentials  kalle  kalle123
+    Register With Credentials  jussi  jussi456
+
 Create Test References
+    Log In With Credentials  kalle  kalle123
     Add Reference  &{TEST_REF1}
     Adding Reference Should Succeed
     Add Reference  &{TEST_REF2}
     Adding Reference Should Succeed
     Add Reference  &{TEST_REF3}
     Adding Reference Should Succeed
+    Sign Out

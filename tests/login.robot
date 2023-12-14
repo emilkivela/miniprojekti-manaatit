@@ -44,32 +44,6 @@ See Other User's References
     Page Should Not Contain  ${Test Book}[key]
     Sign Out
 
-#Remove A Reference That Has The Same Key As Another User's Reference
-#    Set Username  kalle
-#    Set Password  kalle123
-#    Submit Credentials
-#    Add Reference  &{Test Book}
-#    Sign Out
-#    Go To Login Page
-#    Set Username  jussi
-#    Set Password  jussi456
-#    Submit Credentials
-#    Add Reference  &{Test Book}
-#    Log To Console  NO_IDEA_AT_ALL
-#    Remove Reference  &{Test Book}
-#    Log To Console  I_DONT_KNOW
-#    Go To Home Page
-#    Wait Until Page Contains  Article-references
-#    Page Should Not Contain  ${Test Book}[key]
-#    Sign Out
-#    Go To Login Page
-#    Set Username  kalle
-#    Set Password  kalle123
-#    Submit Credentials
-#    Go To Home Page
-#    Wait Until Page Contains  Article-references
-#    Page Should Contain  ${Test Book}[key]
-
 *** Keywords ***
 Set Username
     [Arguments]  ${username}

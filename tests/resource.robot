@@ -23,6 +23,7 @@ Open And Configure Browser
     Call Method  ${options}  add_experimental_option  prefs  ${prefs}
     Open Browser  browser=chrome  options=${options}
     Set Selenium Speed  ${DELAY}
+    Set Window Size  1920  1080
 
 Close Browser And Clear Database
     Close Browser
@@ -104,11 +105,10 @@ Adding Reference Should Fail With Message
     Wait Until Page Contains  Create reference
     Page Should Contain  ${message}
 
-#Remove Reference
-#    [Arguments]  &{reference}
-#    Go To Home Page
-#    Input Text  refkey  ${reference}[key]
-#    Click Button  Remove reference
+Remove Reference
+    [Arguments]  &{reference}
+    Go To Home Page
+    Click Button  css:input[value="${reference}[key]"] + button
 
 Reference Should Exist
     [Arguments]  &{reference}
