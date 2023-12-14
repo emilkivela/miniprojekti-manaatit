@@ -7,6 +7,12 @@ def get_tags():
     db.session.commit()
     return tags
 
+def get_tag(tag_id):
+    sql = "SELECT name FROM tags WHERE id=:tag_id"
+    tag = db.session.execute(text(sql), {"tag_id": tag_id}).fetchall()[0]
+    db.session.commit()
+    return tag
+
 def tag_exists(tag_name):
     result = db.session.execute(
         text("SELECT EXISTS(SELECT 1 FROM tags WHERE name=:tag_name)"),

@@ -169,33 +169,42 @@ def remove_reference():
     articles = article_functions.get_articles(session.get('user_id'))
     return render_template("index.html", books=books, articles=articles)
 
-@app.route("/edit_book/<key>", methods=["POST", "GET"])
+@app.route("/edit_book/<id>", methods=["POST","GET"])
 @login_required
-def edit_book(key):
-    user_id = session.get("user_id")
-    if book_functions.key_in_books(key, user_id):
-        if request.method == "POST":
-            refkey = request.form["refkey"]
-            title = request.form["title"]
-            author = request.form["author"]
-            year = request.form["year"]
-            publisher = request.form["publisher"]
-            tag_id = None
-
-            if not refkey or not title or not author or not year or not publisher:
-                flash("All fields must be filled")
-                return render_template("edit_book.html")
-
-            if not year.isdigit():
-                flash("Year must be a number")
-                return render_template("edit_book.html")
+def edit_book():
+    book_id = id
+    book = book_functions.get_book(book_id)
+    tag_id = book_functions.get_tag_id(book_id)
+    tag = None
+    if tag_id is not None:
+        tag = tag_functions.get_tag(tag_id)
+    tags = tag_functions.get_tags()
+    return render_template("edit_book.html", book=book, tags=tags, tag=tag)
 
 
-            book_functions.update_book(key, refkey, title, author, year, publisher, user_id, tag_id)
-            return redirect("/")
-    else:
-        return redirect("/")
-    return render_template("edit_book.html", key=key)
+@app.route("/update_book", methods=["POST", "GET"])
+@login_required
+def update_book():
+    refkey = request.form["refkey"]
+    title = request.form["title"]
+    author = request.form["author"]
+    year = request.form["year"]
+    publisher = request.form["publisher"]
+    book_id = request.form["book_id"]
+    tag_id = request.form["tag"]
+    if request.form["tag"] == "0":
+        tag_id = None
+
+    if not refkey or not title or not author or not year or not publisher:
+        flash("All fields must be filled")
+        return render_template("edit_book.html")
+
+    if not year.isdigit():
+        flash("Year must be a number")
+        return render_template("edit_book.html")
+
+    book_functions.update_book(book_id, refkey, title, author, year, publisher, tag_id)
+    return redirect("/")
 
 @app.route("/edit_article/<key>", methods=["POST", "GET"])
 @login_required

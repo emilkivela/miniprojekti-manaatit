@@ -8,6 +8,12 @@ def get_books(user_id):
     db.session.commit()
     return books
 
+def get_book(book_id):
+    sql = "SELECT * FROM books WHERE id=:book_id"
+    book = db.session.execute(
+        text(sql), {"book_id": book_id}).fetchone()
+    return book
+
 def key_in_books(refkey, user_id):
     result = db.session.execute(
         text("SELECT EXISTS(SELECT 1 FROM books WHERE refkey=:refkey AND user_id=:user_id)"),
@@ -27,10 +33,19 @@ def delete_reference(refkey, user_id):
     db.session.execute(text(sql), {"refkey": refkey, "user_id": user_id})
     db.session.commit()
 
-def update_book(og_key, refkey, title, author, year, publisher, user_id, tag_id): # pylint: disable=too-many-arguments
-    sql = "UPDATE books SET refkey=:refkey, title=:title, author=:author, pubYear=:pubYear,"\
-         "publisher=:publisher, tag_id=:tag_id WHERE refkey=:og_key AND user_id=:user_id"
+def update_book(book_id, refkey, title, author, year, publisher, tag_id): # pylint: disable=too-many-arguments
+    sql = "UPDATE books SET refkey=:refkey, title=:title, author=:author, pubyear=:pubyear,"\
+        " publisher=:publisher, tag_id=:tag_id WHERE id=:book_id;"
     db.session.execute(text(sql), {"refkey": refkey, "title": title, "author": author,\
-                                   "pubYear": year, "publisher": publisher, "user_id": user_id,\
-                                   "tag_id": tag_id, "og_key":og_key})
+                                   "pubyear": year, "publisher": publisher,\
+                                   "tag_id": tag_id, "book_id": book_id})
     db.session.commit()
+
+def get_tag_id(book_id):
+    sql = "SELECT tag_id FROM books WHERE id=:book_id"
+    tag_id = db.session.execute(
+        text(sql), {"book_id": book_id}).fetchall()
+    db.session.commit()
+    if len(tag_id) > 0:
+        return tag_id[0][0]
+    return None
