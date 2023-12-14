@@ -30,6 +30,7 @@
               <th scope="col" data-sortable="true">Author:</th>
               <th scope="col" data-sortable="true">Year:</th>
               <th scope="col" data-sortable="true">Publisher:</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
@@ -41,6 +42,12 @@
               <td>{{ book[3] }}</td>
               <td>{{ book[4] }}</td>
               <td>{{ book[5] }}</td>
+              <td>
+                <form action="/remove_reference" method="post">
+                  <input type="hidden" id="refkey" name="refkey" value="{{ book[1] }}">
+                  <input type="submit" class="btn btn-primary" value="Delete">
+                </form>
+              </td>
             </tr>
           </p>
           {% endfor %}
@@ -57,6 +64,7 @@
               <th scope="col" data-sortable="true">Year:</th>
               <th scope="col" data-sortable="true">Volume:</th>
               <th scope="col" data-sortable="true">Pages:</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
@@ -69,26 +77,18 @@
                 <td>{{ article[4] }}</td>
                 <td>{{ article[5] }}</td>
                 <td>{{ article[6] }}</td>
-                <td>{{ article[7] }}
+                <td>{{ article[7] }}</td>
+                <td>
+                  <form action="/remove_reference" method="post">
+                    <input type="hidden" id="refkey" name="refkey" value="{{ article[1] }}">
+                    <input type="submit" class="btn btn-primary" value="Delete">
+                  </form>
+                </td>
               </tr>
             </p>
             {% endfor %}
           </tbody>
         </table>
-        <h3>Remove reference</h3>
-        <form action="/remove_reference" method="post">
-          Reference key:<br>
-          <input type="text" id="refkey" name="refkey"><br>
-          {% with messages = get_flashed_messages() %}
-					{% if messages %}
-					  {% for message in messages %}
-						<p>{{ message }}</p>
-					  {% endfor %}
-					{% endif %}
-					{% endwith %}
-          <br>
-          <input type="submit" class="btn btn-primary" value="Remove reference">
-        </form>
       </div> 
     </div>     
   </body>
