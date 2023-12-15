@@ -28,4 +28,4 @@ Create Tag
     Location Should Be  http://${SERVER}/create_tags
     Title Should Be  Add tag
     Input Text  name  ${tag}
-    Click Button  Create tag
+    Click Button  Create a tag
