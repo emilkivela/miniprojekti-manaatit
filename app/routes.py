@@ -19,7 +19,8 @@ def index():
     user_id = session.get('user_id')
     books = book_functions.get_books(user_id)
     articles = article_functions.get_articles(user_id)
-    return render_template("index.html", books=books, articles=articles)
+    tags = tag_functions.get_tags()
+    return render_template("index.html", books=books, articles=articles, tags=tags)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
