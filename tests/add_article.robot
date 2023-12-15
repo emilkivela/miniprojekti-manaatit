@@ -31,7 +31,7 @@ Add Article With Key Missing
     Set Volume  15
     Set Pages  145-6
     Submit Info
-    Wait Until Page Contains Element  css:input[value="Create reference"]
+    Wait Until Page Contains Element  css:button[value="Create reference"]
     Page Should Contain  All fields must be filled
 
 Add Article With Title Missing
@@ -42,7 +42,7 @@ Add Article With Title Missing
     Set Volume  15
     Set Pages  145-6
     Submit Info
-    Wait Until Page Contains Element  css:input[value="Create reference"]
+    Wait Until Page Contains Element  css:button[value="Create reference"]
     Page Should Contain  All fields must be filled
 
 Add Article With Author Missing
@@ -53,7 +53,7 @@ Add Article With Author Missing
     Set Volume  15
     Set Pages  145-6
     Submit Info
-    Wait Until Page Contains Element  css:input[value="Create reference"]
+    Wait Until Page Contains Element  css:button[value="Create reference"]
     Page Should Contain  All fields must be filled
 
 Add Article With Journal Missing
@@ -64,7 +64,7 @@ Add Article With Journal Missing
     Set Volume  15
     Set Pages  145-6
     Submit Info
-    Wait Until Page Contains Element  css:input[value="Create reference"]
+    Wait Until Page Contains Element  css:button[value="Create reference"]
     Page Should Contain  All fields must be filled
 
 Add Article With Year Missing
@@ -75,7 +75,7 @@ Add Article With Year Missing
     Set Volume  15
     Set Pages  145-6
     Submit Info
-    Wait Until Page Contains Element  css:input[value="Create reference"]
+    Wait Until Page Contains Element  css:button[value="Create reference"]
     Page Should Contain  All fields must be filled
 
 Add Article With Non-Numeric Year
@@ -87,7 +87,7 @@ Add Article With Non-Numeric Year
     Set Volume  15
     Set Pages  145-6
     Submit Info
-    Wait Until Page Contains Element  css:input[value="Create reference"]
+    Wait Until Page Contains Element  css:button[value="Create reference"]
     Page Should Contain  Year must be a number
 
 Add Article With Volume Missing
@@ -98,7 +98,7 @@ Add Article With Volume Missing
     Set Year  1876
     Set Pages  145-6
     Submit Info
-    Wait Until Page Contains Element  css:input[value="Create reference"]
+    Wait Until Page Contains Element  css:button[value="Create reference"]
     Page Should Contain  All fields must be filled
 
 Add Article With Pages Missing
@@ -109,12 +109,12 @@ Add Article With Pages Missing
     Set Year  1876
     Set Volume  15
     Submit Info
-    Wait Until Page Contains Element  css:input[value="Create reference"]
+    Wait Until Page Contains Element  css:button[value="Create reference"]
     Page Should Contain  All fields must be filled
 
 *** Keywords ***
 Submit Info
-    Click Button  css:#article input[value="Create reference"]
+    Click Button  css:#article button[value="Create reference"]
 
 Set Key
     [Arguments]  ${key}

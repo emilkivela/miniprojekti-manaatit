@@ -87,7 +87,7 @@ Add Reference
             Input Text  css:#${parent_id} #${input_id}  ${value}
         END
     END
-    Click Button  css:#${parent_id} input[value="Create reference"]
+    Click Button  css:#${parent_id} button[value="Create reference"]
     Set Suite Variable  &{LATEST_REFERENCE}  &{reference}
 
 Adding Reference Should Succeed
@@ -104,7 +104,7 @@ Adding Reference Should Succeed
 
 Adding Reference Should Fail With Message
     [Arguments]  ${message}
-    Wait Until Page Contains Element  css:input[value="Create reference"]
+    Wait Until Page Contains Element  css:button[value="Create reference"]
     Page Should Contain  ${message}
 
 Remove Reference
