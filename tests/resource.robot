@@ -50,17 +50,17 @@ Go To Login Page
 Ref Adding Page Should Be Open For
     [Arguments]  ${type}
     Location Should Be  ${ADDING_URL}
-    Page Should Contain  Create reference
+    Page Should Contain Button  Create reference
     Radio Button Should Be Set To  reftype  show${type}
 
 Book Adding Page Should Be Open
     Location Should Be  ${ADDING_URL}
-    Page Should Contain  Create reference
+    Page Should Contain Button  Create reference
     Radio Button Should Be Set To  reftype  showbook
 
 Article Adding Page Should Be Open
     Location Should Be  ${ADDING_URL}
-    Page Should Contain  Create reference
+    Page Should Contain Button  Create reference
     Radio Button Should Be Set To  reftype  showarticle
 
 Index Page Should Be Open
@@ -104,7 +104,7 @@ Adding Reference Should Succeed
 
 Adding Reference Should Fail With Message
     [Arguments]  ${message}
-    Wait Until Page Contains  Create reference
+    Wait Until Page Contains Element  css:input[value="Create reference"]
     Page Should Contain  ${message}
 
 Remove Reference
