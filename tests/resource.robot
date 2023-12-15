@@ -155,5 +155,6 @@ Login Should Succeed
     Index Page Should Be Open
 
 Sign Out
+    Go To Home Page
     Index Page Should Be Open
     Click Link  Sign out
