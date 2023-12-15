@@ -81,7 +81,9 @@ Add Reference
     Set Local Variable  ${parent_id}  ${reference}[type]
     FOR  ${field}  ${value}  IN  &{reference}
         Set Local Variable  ${input_id}  ${field}
-        IF  $field != "type"
+        IF  $field == "tag"
+            Select From List By Index  css:#${parent_id} #tag  ${reference}[tag]
+        ELSE IF  $field != "type"
             Input Text  css:#${parent_id} #${input_id}  ${value}
         END
     END
@@ -158,3 +160,9 @@ Sign Out
     Go To Home Page
     Index Page Should Be Open
     Click Link  Sign out
+
+Go To Edit Page For
+    [Arguments]  &{reference}
+    Go To Home Page
+    Click Link  css:form[action="/remove_reference"] + a[href="/edit_${reference}[type]/${reference}[id]"]
+    Set Test Variable  $CURRENT_ID  ${reference}[id]

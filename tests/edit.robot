@@ -22,12 +22,6 @@ View Edits On Listing Page
     Page Should Not Contain  ${Test Book}[key]
 
 *** Keywords ***
-Go To Edit Page For
-    [Arguments]  &{reference}
-    Go To Home Page
-    Click Link  css:form[action="/remove_reference"] + a[href="/edit_${reference}[type]/${reference}[id]"]
-    Set Test Variable  $CURRENT_ID  ${reference}[id]
-
 Edit Page Should Be Open For
     [Arguments]  ${type}
     Location Should Be  http://${SERVER}/edit_${type}/${CURRENT_ID}
