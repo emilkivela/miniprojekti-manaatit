@@ -1,7 +1,10 @@
 ## Manaattien LaTeX-viitetyökalu
 ![GHA workflow badge](https://github.com/emilkivela/miniprojekti-manaatit/workflows/CI/badge.svg)
 [![codecov](https://codecov.io/gh/emilkivela/miniprojekti-manaatit/graph/badge.svg)](https://codecov.io/gh/emilkivela/miniprojekti-manaatit)
+
+Sovellus on testattavissa [Azuressa](https://manaatit.azurewebsites.net/)
 - [Backlog](https://helsinkifi-my.sharepoint.com/:x:/g/personal/jannekoi_ad_helsinki_fi/EYn4NiHQI7NOrNhXnwcYWz4BjzSH1-En9Xs1Cre1dXYCrw?e=KMDOtW)
+- [Loppuraportti](https://helsinkifi-my.sharepoint.com/:w:/g/personal/jannekoi_ad_helsinki_fi/EenuGPcJRIhJnO9G3LCXppoB_KGNxMeJWV5whKufFTE97Q?e=PBMowh)
 
 ## Sovelluksen käynnistäminen paikallisesti
 1. Luo virtuaaliympäristö komennolla ``` python3 -m venv venv ```
@@ -38,4 +41,3 @@
 - Fills out acceptance criteria
 - Tested manually and automatically
 
-Sovellus on testattavissa [Azuressa](https://manaatit.azurewebsites.net/)
